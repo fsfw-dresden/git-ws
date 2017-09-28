@@ -409,26 +409,33 @@
  \item[$\rightarrow$] Verstecktes Verzeichnis:
  \raisebox{-0.5\height}{
  \includegraphics[width=20mm]{img-src/git-dir1}}
- 
- 
+
+
 \end{itemize}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[label=gitintro30]
-\frametitle{Theorie: typischer Ablauf / "`staging area"'}
-\vspace{-11mm}
-\begin{center}
-\includegraphics[width=115mm]{img-src/git-add-commit-push-workflow}\\[-2mm]
+\begin{frame}
+  \frametitle{Theorie: typischer Ablauf / "`staging area"' (1)}
+  \begin{center}
+    %% Gehirnvirus zuerst und allein auf einer Folie
+    %% Details mit schema auf einer späteren folie
+    \includegraphics[width=80mm]{img-src/git-staging-area}
+  \end{center}
+\end{frame}
 
-\pause
-\includegraphics[width=80mm]{img-src/git-staging-area}
+\begin{frame}[label=gitintro30]
+\frametitle{Theorie: typischer Ablauf / "`staging area"' (2)}
+\begin{center}
+  % TODO: TikZ the figure
+  \includegraphics[width=115mm]{img-src/git-add-commit-push-workflow}\\[-2mm]
 \end{center}
 Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
- \item Ermöglicht präzise, hoch aufgelöste Commits\\(z.B. nur bestimmte Änderungen einer Datei)
- \item[$\rightarrow$] nachvollziehbare aussagekräftige Commit-History
+ \item Ermöglicht präzise, hoch aufgelöste Commits\\(z.B. nur bestimmte Änderungen einer Datei, nur Änderungen mancher Dateien)
+ \item[$\rightarrow$] nachvollziehbare, aussagekräftige Commit-History
+ \item \texttt{git add -p} und \texttt{git commit -p}
 \end{itemize}
 
 
@@ -438,20 +445,21 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{frame}[label=gitintro40]
 \frametitle{Praxis: Änderungen committen}
 \begin{itemize}
- \item[] \texttt{echo "{}Hallo Welt"{} > README.md}
- \item[] \texttt{git status}
- \item[] \texttt{git add README.md}
- \item[] \texttt{git status}
- \item[] \texttt{git commit -m "{}New content ofREADME"{}}
- \item[] \texttt{git status}
+ \item \texttt{echo "{}Hallo Welt"{} > README.md}
+ \item \texttt{git status}
+ \item \texttt{git add README.md}
+ \item \texttt{git status}
+ \item \texttt{git commit -m "{}New content of README"{}}
+ \item \texttt{git status}
  \bigskip
  
  \pause 
  \item Sich Überblick verschaffen
- \item[] git log
- \item Commit-Nachricht korrigieren (mit Editor)
- \item[]  \texttt{git config -{}-global core.editor mcedit}
- \item[] \texttt{git commit --amend}
+ \item \texttt{git status}
+ \item \texttt{git log}
+ \item letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
+ \item  \texttt{git config -{}-global core.editor mcedit}
+ \item \texttt{git commit --amend}
 \end{itemize}
  
 \end{frame}
