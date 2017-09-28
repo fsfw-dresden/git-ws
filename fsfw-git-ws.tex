@@ -1,0 +1,492 @@
+\documentclass{beamer}
+% \includeonlyframes{uj}
+\synctex=1
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{csquotes}
+\usepackage{eurosym}
+\usepackage{wasysym}
+\MakeAutoQuote{„}{”}
+\usepackage[absolute,overlay]{textpos} % for \textblock
+
+\usepackage{lmodern}
+
+
+% \usepackage{lmodern}
+% \usepackage{anyfontsize}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=[rgb]{1, 1, 1}, %
+  urlcolor=[rgb]{.2, .2, .5} %
+  % allcolors=[rgb]{0, 0, 0} % schwarz
+}
+
+\usetheme{Dresden}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\title{Versionsverwaltung mit git: Warum und wie.}
+\subtitle{Bunter Nachmittag des iFSR, 02.10.2017}
+
+\addtobeamertemplate{frametitle}{}{%
+  \begin{textblock*}{130mm}(.963\textwidth,8.4mm)
+    \includegraphics[width=2.25cm]{img-src/fsfw-logo.pdf}
+  \end{textblock*}
+}
+
+\begin{document}
+
+\begin{frame}
+  \begin{center}%
+    \includegraphics[width=3cm]{img-src/fsfw-logo-with-text.pdf}\\
+
+    \vspace*{-0.5\baselineskip}
+
+    \parbox{.95\columnwidth}{\centering\Large\inserttitle}
+
+    \vspace*{\baselineskip}
+
+    \structure{\large \insertsubtitle}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=wb]
+
+\begin{center}
+ \vspace{10mm}
+\structure{\Huge  <Eigenwerbung>}
+\end{center}
+ 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct1]
+  \frametitle{Wer sind wir?}
+
+  \onslide<+->
+
+  \begin{itemize}
+  \item Hochschulgruppe an der TU (gegründet 2014, ca. 10 P.)
+  \item Studierende (TU, HTW) und andere Leute
+  \item Hochschulen als Zielgruppe (Multiplikationswirkung)\\
+    und Arbeitsfeld (Räume, Strukturen)
+
+    \bigskip\onslide<+->
+
+  \item Bisherige Projekte
+    \begin{itemize}
+    \item Linux-Install-Party, Linux-Presentation-Day
+    \item Verschlüsselungsgewinnspiel
+    \item Monatliche Sprechstunde zu \LaTeX{} u.a.
+    \item Formulierung eines Programmpapiers
+    \item „Uni-Stick”:~80 $\times$ 8\,GB mit freier Software
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct2]
+  \frametitle{Warum machen wir das? Aus Überzeugung!}
+
+  \onslide<+->
+
+  \begin{itemize}
+  \item \emph{Überzeugung 1}: freie und quelloffene Software ist (oft) besser\\
+    (technische + nicht technische Argumente)\\
+    \bigskip\onslide<+->
+  \item \emph{Überzeugung 2}: öffentlich finanzierte wissenschaftliche Inhalte
+    (AutorInnen, GutachterInnen) sollten nicht von öffentlich finanzierten
+    Bibliotheken für horrende Summen von Zeitschriften-Verlagen gekauft werden
+    müssen
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct1b,t]
+  \frametitle{Projekt Uni-Stick}
+
+  \begin{itemize}
+  \item \textbf{4000} Flyer in Ersti-Tüten: \textbf{Gutscheine} für 8\,GB Stick mit freier Software
+    fürs Studium, 550 \geneuro{} vom TU-StuRa für 80 Stk.
+  \item Live-Linux / freie Windows-Programme
+    \pause
+  \item Hat viel Arbeit gemacht
+    \pause
+  \item Ist gut angekommen (ca. 250 TN)
+  \end{itemize}
+
+  \begin{textblock*}{40mm}[0.,0.](80mm,37mm)
+    \visible<2->{
+      \includegraphics[width=40mm]{img-src/usb-hub}
+    }
+  \end{textblock*}
+
+  \begin{textblock*}{55mm}[0.,0.](15mm,50mm)
+    \visible<3->{
+      \includegraphics[width=55mm]{img-src/uni-stick-ausgabe-vortrag}
+    }
+  \end{textblock*}
+
+  \begin{textblock*}{55mm}[0.,0.](71mm,63mm)
+    \visible<4->{
+      \begin{itemize}
+       \item Accessibility:
+       \hspace{-5mm}
+       \begin{itemize}
+        \item brltty
+        \item gnome-orca (Screenreader)
+        \item ...
+        \item WIP!
+       \end{itemize}
+
+       
+       
+      \end{itemize}
+
+    }
+  \end{textblock*}
+  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct3]
+  \frametitle{Zukunftsideen}
+
+  \begin{itemize}
+  \item Fortführung "`Uni-Stick"'
+  \item Studierende zum Nutzen/Verbessern freier Software animieren
+    \begin{itemize}
+    \item Mehr Blog-Beiträge
+    \item Kurse (\LaTeX / Python /\textbf{ Git} / Inkscape / \dots)
+    \item Ansible-Infrastruktur-Stipendium
+    \item OpenSource-Wettbewerb/Preis
+    \item \dots
+    \end{itemize}
+
+    \bigskip
+
+  \item Aufmerksamkeit erzeugen / Lobby-Arbeit
+
+    \bigskip
+
+  \item Vernetzung mit anderen Städten
+
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct4]
+  \frametitle{Weitere Informationen}
+
+  \onslide<+->
+
+  \begin{center}
+    \url{https://fsfw-dresden.de/}
+    % HACK THE PLANET!
+    $\;\;\left\{\;\;\text{
+        \parbox{2.3cm}{
+          \texttt{uni-stick}\\[1mm]
+          \texttt{blog}\\[1mm]
+          \texttt{newsletter}
+          \texttt{mitmachen}\\[1mm]
+          \texttt{fork}\\[-3mm]
+        }}
+    \right.$
+
+    \vspace*{2\bigskipamount}
+
+    \includegraphics[width=50mm]{img-src/fsfw-netzwerke}
+  \end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=wb2]
+
+\begin{center}
+ \vspace{10mm}
+\structure{\Huge  </Eigenwerbung>}
+\end{center}
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ol1]
+  \frametitle{Gliederung}
+  \begin{itemize}
+   \item Warum Versionsverwaltung
+   \item Warum git
+   \item Git Einführung (mit Praxis)
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=why10]
+\frametitle{Warum Versionsverwaltung?}
+
+\begin{itemize}
+  \item Projekte bestehen aus schrittweisen Änderungen
+  \item Bedürfnis, zu vorherigem Zustand zurückkehren zu können
+  
+  \begin{itemize}
+\item  ("`Savegame"')
+    \end{itemize}
+
+  \item Naiver Ansatz: \hspace{10mm}
+  \raisebox{-0.5\height}{\includegraphics[width=40mm]{img-src/my-software-dirs}}
+  
+  \item Probleme:
+  \begin{itemize}
+   \item Speicherplatz
+   \item Fehlende Übersicht
+   \item Skaliert nicht (Teamwork)
+  \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO: image source http://techidiocy.com/understand-git-clone-command-svn-checkout-vs-git-clone/
+% https://softwareengineering.stackexchange.com/questions/136079/are-there-any-statistics-that-show-the-popularity-of-git-versus-svn
+% http://www.wastedpotential.com/version-control-throwdown-git-vs-svn/
+
+\begin{frame}[label=why20]
+\frametitle{Warum Git? (1)}
+
+\begin{itemize}
+  \item Lösung 1: zentrale Versionsverwaltung
+  \begin{itemize}
+   \item CVS (1986), SVN (2000)
+   \item Idee:\\[-2mm]
+   \hspace{2cm}\includegraphics[width=30mm]{img-src/structure-svn1}
+   
+  \end{itemize}
+  \item Probleme:
+  \begin{itemize}
+   \item Abhängig von Server-Erreichbarkeit
+   \item Performanz
+  \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=why30]
+\frametitle{Warum Git? (2)}
+
+\begin{itemize}
+  \item Lösung 2: \textbf{de}zentrale Versionsverwaltung
+  \begin{itemize}
+   \item mercurial (2005), bazaar (2005) \textbf{git} (2005)
+   \item Idee:\\[-2mm]
+   \hspace{2cm}\includegraphics[width=30mm]{img-src/structure-git1}
+  \end{itemize}
+  \item Vorteile:
+  \begin{itemize}
+   \item Alle Operationen lokal $\rightarrow$ schnell, unabhängig
+   \item Einfaches "`branching"' und "`merging"'
+   \item ...
+  \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=why40]
+\frametitle{Warum Git? (3)}
+
+\begin{textblock*}{\textwidth}[0.5,0.](60mm,20mm)
+\begin{center}%
+\only<1>{
+\includegraphics[width=80mm]{img-src/svn-vs-git-boxing}
+}
+\only<2->{
+\includegraphics[width=80mm]{img-src/svn-vs-git-stats}
+}
+~\\[3mm]
+\visible<3->
+{
+2017: Git = defacto Standard
+}
+\end{center}
+\end{textblock*}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=gitintro10]
+\frametitle{Einführung in git}
+\begin{itemize}
+ \item Wir empfehlen: git Bedienung via Kommandozeile
+ \item Syntax: \texttt{git <command> [<args>]}
+ \item Beispiele:
+ 
+ \begin{itemize}
+  \item \texttt{git init}
+  \item \texttt{git add myscrip.py}
+  \item \texttt{git commit -m "{}add basic functionality"}
+  \item \texttt{git push}\\[2mm]
+  \pause
+  \item \texttt{git status}
+  \item \texttt{git log}
+  \item \texttt{git branch develop}
+  \item \texttt{git checkout master}
+  \item \texttt{git merge develop}
+  \item \texttt{git blame myscrip.py}
+  \item \texttt{git diff}
+  \item \texttt{git difftool}
+  
+ \end{itemize}
+\end{itemize}
+
+\begin{textblock*}{\textwidth}[0.5,0.](120mm, 60mm)
+ 
+\visible<3->{
+\begin{itemize}
+ \item[] ~
+\begin{itemize}
+
+  \item \texttt{git clone}
+  \item \texttt{git help}
+  \item \texttt{git rebase} \\[2mm]
+  \item \texttt{git config}
+  
+  \item \texttt{gitk}
+
+\end{itemize}
+\end{itemize}
+}
+\end{textblock*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=gitintro20]
+\frametitle{Praxis 1: Erste Schritte}
+\begin{itemize}
+ \item Konfiguration anpassen
+ \begin{itemize}
+  \item \texttt{git config -{}-global user.email "foo@bar.de"}
+  \item \texttt{git config -{}-global user.name "Your Name"}
+  ...
+ \end{itemize}
+
+ \item Eigenes Repo erstellen
+ \begin{itemize}
+  \item \texttt{git init}
+ \end{itemize}
+ \item Alternativ: Bestehenedes Repo klonen
+ \begin{itemize}
+  \item \texttt{git clone <url>}
+ \end{itemize}
+ \item[]
+ \pause
+ \item Hintergrund: Wo speichert git die relevanten Informationen?
+ \item[$\rightarrow$] Verstecktes Verzeichnis:
+ \raisebox{-0.5\height}{
+ \includegraphics[width=20mm]{img-src/git-dir1}}
+ 
+ 
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=gitintro30]
+\frametitle{Theorie: typischer Ablauf / "`staging area"'}
+\vspace{-11mm}
+\begin{center}
+\includegraphics[width=115mm]{img-src/git-add-commit-push-workflow}\\[-2mm]
+
+\pause
+\includegraphics[width=80mm]{img-src/git-staging-area}
+\end{center}
+Wozu zweiphasiger Commit-Prozess?
+\begin{itemize}
+ \item Ermöglicht präzise, hoch aufgelöste Commits\\(z.B. nur bestimmte Änderungen einer Datei)
+ \item[$\rightarrow$] nachvollziehbare aussagekräftige Commit-History
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=gitintro40]
+\frametitle{Praxis: Änderungen committen}
+\begin{itemize}
+ \item[] \texttt{echo "{}Hallo Welt"{} > README.md}
+ \item[] \texttt{git status}
+ \item[] \texttt{git add README.md}
+ \item[] \texttt{git status}
+ \item[] \texttt{git commit -m "{}New content ofREADME"{}}
+ \item[] \texttt{git status}
+ \bigskip
+ 
+ \pause 
+ \item Sich Überblick verschaffen
+ \item[] git log
+ \item Commit-Nachricht korrigieren (mit Editor)
+ \item[]  \texttt{git config -{}-global core.editor mcedit}
+ \item[] \texttt{git commit --amend}
+\end{itemize}
+ 
+\end{frame}
+
+
+\begin{frame}[label=link10]{Tipps und Links}
+Weitere Ressourcen:
+\tiny
+\begin{itemize}
+ \item 
+\url{https://learn.adafruit.com/an-introduction-to-collaborating-with-version-control/initializing-a-repository-and-making-commits}
+\item ...
+\end{itemize}
+
+ 
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=uj]{Ausblick}
+\begin{itemize}
+ \item Fragen?\\[10mm]
+ \item 
+ \begin{itemize}
+  \item Enigmail (Plugin für Thunderbird)
+  \item Mailvelope (Browserplugin für Webmail)
+  \item Zeit?\\[5mm]
+  \pause
+  \end{itemize}
+  \item Unterstützung später {\tiny (im Rahmen unserer Möglichkeiten)}:
+  \begin{itemize}
+   \item \url{https://fsfw-dresden.de/sprechstunde}
+   \item \url{kontakt@fsfw-dresden.de}
+ \end{itemize}
+ 
+\end{itemize}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
