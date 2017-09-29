@@ -12,6 +12,9 @@
 \MakeAutoQuote{„}{”}
 \usepackage[absolute,overlay]{textpos} % for \textblock
 
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
 \usepackage{lmodern}
 
 
@@ -427,15 +430,49 @@
 
 \begin{frame}[label=gitintro30]
 \frametitle{Theorie: typischer Ablauf / "`staging area"' (2)}
+\vspace{-8mm}
 \begin{center}
-  % TODO: TikZ the figure
-  \includegraphics[width=115mm]{img-src/git-add-commit-push-workflow}\\[-2mm]
+  \begin{tikzpicture}[
+    every text node part/.style={align=center},
+    node distance=3cm,
+    location/.style={
+      % The shape:
+      rectangle,
+      % The size:
+      minimum size=6mm,
+      % The border:
+      very thick,
+      draw=red!50!black!50,
+      % 50% red and 50% black,
+      % and that mixed with 50% white
+      % The filling:
+      top color=white,
+      % a shading that is white at the top...
+      bottom color=red!50!black!20, % and something else at the bottom
+      % Font
+      font=\itshape,
+      text height=4ex,
+      text depth=0.25ex,
+    }]
+
+    \node[location] (untracked) {untracked \\ unstaged};
+    \node[location] (staged) [right of=untracked] {staged};
+    \node[location] (committed) [right of=staged] {local \\ repository};
+    \node[location] (published) [right of=committed] {remote \\ repository};
+
+    \draw[->, thick, color=black!30!white] (untracked.east) -- (staged.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git add}};
+    \draw[->, thick, color=black!30!white] (staged.east) -- (committed.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git commit}};
+    \draw[->, thick, color=black!30!white] (committed.east) -- (published.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git push}};
+  \end{tikzpicture}
 \end{center}
 Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
  \item Ermöglicht präzise, hoch aufgelöste Commits\\(z.B. nur bestimmte Änderungen einer Datei, nur Änderungen mancher Dateien)
- \item[$\rightarrow$] nachvollziehbare, aussagekräftige Commit-History
- \item \texttt{git add -p} und \texttt{git commit -p}
+ \item[$\Rightarrow$] nachvollziehbare, aussagekräftige Commit-History
+ \item \emph{killer feature:} \texttt{git add -p}, \texttt{git commit -p}
 \end{itemize}
 
 
