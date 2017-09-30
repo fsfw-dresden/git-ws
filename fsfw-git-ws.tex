@@ -452,14 +452,12 @@
       top color=white,
       % a shading that is white at the top...
       bottom color=red!50!black!20, % and something else at the bottom
-      % Font
-      font=\itshape,
       text height=4ex,
       text depth=0.25ex,
     }]
 
     \node[location] (untracked) {working \\ tree};
-    \node[location] (staged) [right of=untracked] {index \\ ~};
+    \node[location] (staged) [right of=untracked] {index \\[-0.7em]};
     \node[location] (committed) [right of=staged] {local \\ repository};
     \node[location] (published) [right of=committed] {remote \\ repository};
 
