@@ -23,7 +23,7 @@
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=[rgb]{1, 1, 1}, %
+  linkcolor=, %
   urlcolor=[rgb]{.2, .2, .5} %
   % allcolors=[rgb]{0, 0, 0} % schwarz
 }
@@ -229,15 +229,12 @@
 
 \begin{frame}[label=ol1]
   \frametitle{Gliederung}
-  \begin{itemize}
-   \item Warum Versionsverwaltung
-   \item Warum git
-   \item Git Einführung (mit Praxis)
-  \end{itemize}
-
+  \tableofcontents
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Warum Versionsverwaltung?}
+
 \begin{frame}[label=why10]
 \frametitle{Warum Versionsverwaltung?}
 
@@ -266,7 +263,7 @@
 % TODO: image source http://techidiocy.com/understand-git-clone-command-svn-checkout-vs-git-clone/
 % https://softwareengineering.stackexchange.com/questions/136079/are-there-any-statistics-that-show-the-popularity-of-git-versus-svn
 % http://www.wastedpotential.com/version-control-throwdown-git-vs-svn/
-
+\section{Warum Git?}
 \begin{frame}[label=why20]
 \frametitle{Warum Git? (1)}
 
@@ -337,7 +334,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\section{Git Einführung (mit Praxis)}
 \begin{frame}[label=gitintro10]
 \frametitle{Einführung in git}
 \begin{itemize}
@@ -501,9 +498,7 @@ Wozu zweiphasiger Commit-Prozess?
  \item \texttt{git status}
 \end{itemize}
  \bigskip
- 
- \pause 
- \pause 
+ \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
  \item \texttt{git status}
