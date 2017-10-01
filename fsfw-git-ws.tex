@@ -1,5 +1,5 @@
 \documentclass{beamer}
-\includeonlyframes{gitintro40}
+% \includeonlyframes{branches30}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -830,6 +830,8 @@ Wozu zweiphasiger Commit-Prozess?
 \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}
 \frametitle{Theorie: Zusammenfassung Branches}
 \begin{columns}
@@ -879,6 +881,170 @@ Wozu zweiphasiger Commit-Prozess?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile,label=branches30]
+\frametitle{merge: Zusammenführen von Zweigen}
+\begin{columns}
+\column{0.39\textwidth}
+\only<1>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B -- C  -- D -- E
+
+      };
+
+        \gitbranch
+        {master}     % node name and text
+        {left=of B} % node placement
+        {B}
+
+        \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+      % HEAD reference
+      \gitHEAD
+        {right=of E} % node placement
+        {E}
+\end{tikzpicture}
+}%end of only
+\only<2>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B -- C  -- D -- E
+
+      };
+
+        \gitbranch
+        {master}     % node name and text
+        {left=of B} % node placement
+        {B}
+
+        \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+      % HEAD reference
+      \gitHEAD
+        {right=of B} % node placement
+        {B}
+\end{tikzpicture}
+}%end of only
+\only<3>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B -- C  -- D -- E
+
+      };
+
+        \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+        \gitbranch
+        {master}     % node name and text
+        {above=of bugfix} % node placement
+        {E}
+
+        % HEAD reference
+      \gitHEAD
+        {right=of E} % node placement
+        {E}
+\end{tikzpicture}
+}%end of only
+
+% ---
+
+\only<4>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C  -- D,
+              E -- F,
+              }
+      };
+
+      \gitbranch
+        {master}     % node name and text
+        {left=of D} % node placement
+        {D}
+
+   \gitbranch
+        {bugfix}     % node name and text
+        {right=of F} % node placement
+        {F}
+
+      \gitHEAD
+        {below=of master} % node placement
+        {D}
+\end{tikzpicture}
+}%end of only
+\only<5->{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C  -- D,
+              E -- F,
+              } -- H
+      };
+
+      \gitbranch
+        {master}     % node name and text
+        {left=of H} % node placement
+        {H}
+
+   \gitbranch
+        {bugfix}     % node name and text
+        {right=of F} % node placement
+        {F}
+
+      \gitHEAD
+        {below=of master} % node placement
+        {H}
+\end{tikzpicture}
+}%end of only
+
+\column{0.72\textwidth}
+\begin{itemize}
+\item Fall 1: Fast-Forward
+\pause
+\begin{itemize}
+ \item \verb|git checkout master|
+ \pause
+ \item \verb|git merge bugfix|
+\end{itemize}
+\pause
+\bigskip
+\item Fall 2: Parallele Zweige
+\begin{itemize}
+ \item \verb|git checkout master|
+ \pause
+ \item \verb|git merge bugfix|
+ \item[$\Rightarrow$] Erzeugung eines "`Merge-Commits"'
+ \pause
+ \item Automatische Konfliktlösung ziemlich gut
+ \item Gelegentlich manueller Eingriff notwendig
+\end{itemize}
+
+\end{itemize}
+\end{columns}
+
+\end{frame}
 % noch nich fertig/sinnvoll
 % \begin{frame}[label=komplex10]
 % \frametitle{Beispiel-Repo: lyrik}
@@ -939,12 +1105,13 @@ Wozu zweiphasiger Commit-Prozess?
 \item branches \checkmark
 \item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
 \item HEAD\checkmark , hash bzw. ref
-\item merge (Konflikte),  erwähnen: push, fast-forward, rebase,
+\item merge (Konflikte) \checkmark, fast-forward \checkmark
 \item .gitignore
 \item github $\neq$ git
 \item git nicht gut für Binärdateien
 \item bash extension
 \item aliase in .gitconfig
+\item erwähnen: push,  rebase,
 \item link auf branching model
 \item globale gitignore
 
