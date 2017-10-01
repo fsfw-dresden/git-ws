@@ -165,7 +165,7 @@
 		\cmdline{git checkout <B2>}
 		\cmdline{git merge <B1>}
                 \annotation{or}
-		\cmdline{git merge -{}-no-ff -m "Message" <B1>}
+		\cmdline{git merge -{}-no-ff <B1>}
 		\annotation{generates commit even if fast-forwarding is possible}
 	\subsection{Create Branch based on HEAD and checkout}
 		\cmdline{git checkout -b <branch>}
@@ -218,13 +218,16 @@
 
 %% Revert changes
 \colouredbox{green}{
-	\begin{center}\section{Revert}\end{center}
+	\begin{center}\section{Reverting changes}\end{center}
 	\subsection{Return to last committed state}
 		\cmdline{git reset -{}-hard}
 	\subsection{Revert specific commit}
 		\cmdline{git revert <ID>}
+                \annotation{this is safe for published commits}
 	\subsection{fix/change last commit}
 		\cmdline{git commit -{}-amend}
+                \annotation{\emph{never} do this on a published commit\\
+                  unless you know what you are doing}
 }
 
 %% Git tips to handle things
@@ -243,7 +246,7 @@
 \begin{center}
 \footnotesize
 \rule{0.9\linewidth}{0.25pt}
-\par fsfw git CheatSheet – Date: \today \ - Version \Version\
+\par fsfw git CheatSheet – Date: \today \ – Version \Version\
 based on \url{https://github.com/chiemseesurfer/latex-gitCheatSheet} Version 1.5
 by Max Oberberger (\texttt{github@oberbergers.de})
 \end{center}
