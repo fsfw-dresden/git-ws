@@ -13,7 +13,10 @@
 \usepackage[absolute,overlay]{textpos} % for \textblock
 
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{%
+  positioning,
+  calc,
+}
 
 \usepackage{lmodern}
 
@@ -23,7 +26,7 @@
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=[rgb]{1, 1, 1}, %
+  linkcolor=, %
   urlcolor=[rgb]{.2, .2, .5} %
   % allcolors=[rgb]{0, 0, 0} % schwarz
 }
@@ -229,15 +232,12 @@
 
 \begin{frame}[label=ol1]
   \frametitle{Gliederung}
-  \begin{itemize}
-   \item Warum Versionsverwaltung
-   \item Warum git
-   \item Git Einführung (mit Praxis)
-  \end{itemize}
-
+  \tableofcontents
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Warum Versionsverwaltung?}
+
 \begin{frame}[label=why10]
 \frametitle{Warum Versionsverwaltung?}
 
@@ -266,7 +266,7 @@
 % TODO: image source http://techidiocy.com/understand-git-clone-command-svn-checkout-vs-git-clone/
 % https://softwareengineering.stackexchange.com/questions/136079/are-there-any-statistics-that-show-the-popularity-of-git-versus-svn
 % http://www.wastedpotential.com/version-control-throwdown-git-vs-svn/
-
+\section{Warum Git?}
 \begin{frame}[label=why20]
 \frametitle{Warum Git? (1)}
 
@@ -274,10 +274,43 @@
   \item Lösung 1: zentrale Versionsverwaltung
   \begin{itemize}
    \item CVS (1986), SVN (2000)
-   \item Idee:\\[-2mm]
-   \hspace{2cm}\includegraphics[width=30mm]{img-src/structure-svn1}
-   
-  \end{itemize}
+   \item Idee: Zentrales Repositorium und Arbeitskopien \\[1ex]
+       \hspace*{1cm}\begin{tikzpicture}[%
+           node distance=2cm and 1cm,
+           location/.style={
+             % The shape:
+             rectangle,
+             % The size:
+             minimum size=6mm,
+             % The border:
+             very thick,
+             draw=red!50!black!50,
+             % 50% red and 50% black,
+             % and that mixed with 50% white
+             % The filling:
+             top color=white,
+             % a shading that is white at the top...
+             bottom color=red!50!black!20, % and something else at the bottom
+           },
+           checkout/.style={
+             <->,
+             shorten <=2pt,
+             shorten >=2pt,
+             thick,
+             color=black!40!white,
+           }]
+
+         ]
+         \node[location, draw=green!50!black!50, bottom color=green!50!black!20] (repository) {SVN Repo};
+         \node[location] (user1) [below left of=repository] {Arbeitskopie 1};
+         \node[location] (user2) [below of=repository, yshift=-1ex] {Arbeitskopie 2};
+         \node[location] (user3) [below right of=repository] {Arbeitskopie 3};
+
+         \draw[checkout] ($ (repository.south) + (-2pt, 0) $) -- (user1.north);
+         \draw[checkout] (repository.south) -- (user2.north);
+         \draw[checkout] ($ (repository.south) + (2pt, 0) $) -- (user3.north);
+       \end{tikzpicture}
+   \end{itemize}
   \item Probleme:
   \begin{itemize}
    \item Abhängig von Server-Erreichbarkeit
@@ -295,8 +328,42 @@
   \item Lösung 2: \textbf{de}zentrale Versionsverwaltung
   \begin{itemize}
    \item mercurial (2005), bazaar (2005) \textbf{git} (2005)
-   \item Idee:\\[-2mm]
-   \hspace{2cm}\includegraphics[width=30mm]{img-src/structure-git1}
+   \item Idee: Jeder hat ein vollwertiges Repositorium \\[1ex]
+      \hspace*{1cm}\begin{tikzpicture}[%
+           node distance=2cm and 1cm,
+           location/.style={
+             % The shape:
+             rectangle,
+             % The size:
+             minimum size=6mm,
+             % The border:
+             very thick,
+             draw=green!50!black!50,
+             % 50% red and 50% black,
+             % and that mixed with 50% white
+             % The filling:
+             top color=white,
+             % a shading that is white at the top...
+             bottom color=green!50!black!20, % and something else at the bottom
+           },
+           checkout/.style={
+             <->,
+             shorten <=2pt,
+             shorten >=2pt,
+             thick,
+             color=black!40!white,
+           }]
+
+         ]
+         \node[location] (user1) {Git Repo 1};
+         \node[location] (user2) [below  left of=user1] {Git Repo 2};
+         \node[location] (user3) [below right of=user1] {Git Repo 3};
+
+         \draw[checkout] ($ (user1.south) + (-2pt, 0) $) -- (user2.north);
+         \draw[checkout] (user3.west) -- (user2.east);
+         \draw[checkout] ($ (user1.south) + (2pt, 0) $) -- (user3.north);
+
+     \end{tikzpicture}
   \end{itemize}
   \item Vorteile:
   \begin{itemize}
@@ -322,7 +389,7 @@
 \begin{figure}
   \includegraphics[width=80mm]{img-src/svn-vs-git-stats}\\
 %   \caption{Git and SVN \$WHATISPLOTTEDHERE} %% "Abbildung:" Unnötig
-{Verbreitung: Git vs SVN}
+{Gefühlter Grad der Verbreitung: Git vs SVN}
 \end{figure}
 }
 \bigskip
@@ -337,7 +404,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\section{Git Einführung (mit Praxis)}
 \begin{frame}[label=gitintro10]
 \frametitle{Einführung in git}
 \begin{itemize}
@@ -455,24 +522,21 @@
       top color=white,
       % a shading that is white at the top...
       bottom color=red!50!black!20, % and something else at the bottom
-      % Font
-      font=\itshape,
-%       text height=4ex,
-      text height=8ex,
+      text height=4ex,
       text depth=0.25ex,
     }]
 
-    \node[location] (untracked) {untracked / \\ unstaged \\ ("`working tree"')};
-    \node[location] (staged) [right of=untracked] {staged \\("`index"') \\~};
-    \node[location] (committed) [right of=staged] {local \\ repository \\~};
-    \node[location] (published) [right of=committed] {remote \\ repository \\~};
+    \node[location] (untracked) {working \\ tree};
+    \node[location] (staged) [right of=untracked] {index \\[-0.7em]};
+    \node[location] (committed) [right of=staged] {local \\ repository};
+    \node[location] (published) [right of=committed] {remote \\ repository};
 
-    \draw[->, thick, color=black!80!white] (untracked.east) -- (staged.west)
-          node [midway, above=4.5ex, color=black] {\texttt{git add}};
-    \draw[->, thick, color=black!80!white] (staged.east) -- (committed.west)
-          node [midway, above=4.5ex, color=black] {\texttt{git commit}};
-    \draw[->, thick, color=black!30!white] (committed.east) -- (published.west)
-          node [midway, above=4.5ex, color=black] {\texttt{git push}};
+    \draw[->, thick, color=black!40!white] (untracked.east) -- (staged.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git add}};
+    \draw[->, thick, color=black!40!white] (staged.east) -- (committed.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git commit}};
+    \draw[->, thick, color=black!40!white] (committed.east) -- (published.west)
+          node [midway, above=2.5ex, color=black] {\texttt{git push}};
   \end{tikzpicture}
 \end{center}
 Wozu zweiphasiger Commit-Prozess?
@@ -502,9 +566,7 @@ Wozu zweiphasiger Commit-Prozess?
  \item \texttt{git status}
 \end{itemize}
  \bigskip
- 
- \pause 
- \pause 
+ \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
  \item \texttt{git status}
@@ -536,6 +598,7 @@ Wozu zweiphasiger Commit-Prozess?
 \item git nicht gut für Binärdateien
 \item bash extension
 \item aliase in .gitconfig
+\item globale gitignore
 
 \end{itemize}
 \end{frame}
