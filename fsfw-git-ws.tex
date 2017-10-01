@@ -5,7 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage[absolute,overlay]{textpos}
+\usepackage{verbatim}
 \usepackage{csquotes}
 \usepackage{eurosym}
 \usepackage{wasysym}
@@ -589,7 +589,7 @@ Wozu zweiphasiger Commit-Prozess?
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=gitintro40]
+\begin{frame}[fragile,label=gitintro40]
 \frametitle{Praxis: minimales Repo}
 \vspace{-5mm}
 \begin{columns}
@@ -598,17 +598,17 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
- \item \texttt{printf "{}Hallo\textbackslash{}nWelt\textbackslash{}n"{} > README.md}
+ \item \verb|printf "Hallo\nWelt\n" > README.md|
  \item \texttt{git status}
  \item \texttt{git add README.md} \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
  \item \texttt{git status}
- \item \texttt{git commit -m "{}New content of README"{}} %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
+ \item \verb|git commit -m "New content of README"| %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
  \item \texttt{git status}
 \end{itemize}
 \pause
  \item Änderungen durchführen, anzeigen und committen
 \begin{itemize}
- \item \texttt{sed -i {-}{-} '{}s/Welt/Leute/g{}' README.md}
+ \item \verb|sed -i -- "s/Welt/Leute/g" README.md|
  \item \texttt{git diff}
  \pause
  \pause
@@ -935,10 +935,10 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{frame}[label=gitintro50]
 \frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
 \begin{itemize}
-\item diff / difftool
+\item diff \checkmark / difftool
 \item branches \checkmark
 \item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
-\item HEAD\checkmark , hash
+\item HEAD\checkmark , hash bzw. ref
 \item merge (Konflikte),  erwähnen: push, fast-forward, rebase,
 \item .gitignore
 \item github $\neq$ git

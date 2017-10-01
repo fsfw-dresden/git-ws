@@ -5,6 +5,7 @@
 *.tex~
 *.aux
 *.bbl
+*.vrb
 *.snm
 *.synctex.gz
 *.blg
