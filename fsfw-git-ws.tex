@@ -770,10 +770,10 @@ Wozu zweiphasiger Commit-Prozess?
 \column{0.65\textwidth}
 \begin{itemize}
 \item Unkompliziertes paralleles Arbeiten an verschieden Versionen
-\item<2-> Immer eine Revision ist aktiv \emph{\texttt{HEAD}}, der aktive Branch folgt \texttt{HEAD}
+\item<2-> Der aktive Branch folgt \texttt{HEAD}
 \item<3-> beliebig viele Branches möglich
-\item<4-> Branch wechseln: \texttt{git checkout \only<4,6>{bugfix}\only<5>{master}\only<7,8,9>{<ref>}}
-\item<8-> neuer Branch auf \texttt{HEAD} erstellen: \texttt{git checkout -b experiment}
+\item<4-> Branch/Revision wechseln:\\ \texttt{git checkout \only<4,6>{bugfix}\only<5>{master}\only<7,8,9>{<ref>}}
+\item<8-> neuer Branch auf \texttt{HEAD} erstellen:\\ \texttt{git checkout -b experiment}
 \end{itemize}
 \end{columns}
 \end{frame}
