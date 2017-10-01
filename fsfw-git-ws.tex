@@ -561,7 +561,7 @@ Wozu zweiphasiger Commit-Prozess?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=gitintro40]
-\frametitle{Praxis: Änderungen committen}
+\frametitle{Praxis 2: Änderungen committen}
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
@@ -592,35 +592,22 @@ Wozu zweiphasiger Commit-Prozess?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=branches10]
-\frametitle{Branches}
-\begin{itemize}
-\item Unkompliziertes paralleles Arbeiten an verschieden Versionen\\
-(Bugfix, neues Feature)
-\item<2-> Ein Branch (default: \textit{master}) ist immer aktiv ("`HEAD")
-\item<3-> beliebig viele Branches möglich
-\item<4-> Branch wechseln: \texttt{git checkout \only<4,6>{bugfix} \only<5>{master}}
-\item<7-> Neuen Branch erstellen: \texttt{git checkout -b experiment}
-\end{itemize}
-\vspace{-3mm}
-\begin{minipage}[t][10cm][t]{\textwidth}
-
-\only<2>{
+\frametitle{Theorie: Branches}
+\begin{columns}
+\column{0.349\textwidth}
+\only<1,2>{
 \begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
       % Commit DAG
-      \gitDAG[grow right sep = 2em]{
+      \gitDAG[grow down sep = 1em]{
         A -- B -- C
       };
       % Branch
 
-        \gittag
-        [v0p1]       % node name
-        {erster commit}       % node text
-        {above=of A} % node placement
-        {A}          % target
-
       \gitbranch
         {master}     % node name and text
-        {above=of C} % node placement
+        {left=of C} % node placement
         {C}          % target
       % HEAD reference
       \gitHEAD
@@ -630,8 +617,10 @@ Wozu zweiphasiger Commit-Prozess?
 }
 \only<3,5>{
 \begin{tikzpicture}
+     \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
       % Commit DAG
-      \gitDAG[grow right sep = 2em]{
+      \gitDAG[grow down sep = 1em]{
         A -- B --{
               C,
               D -- E,
@@ -639,15 +628,9 @@ Wozu zweiphasiger Commit-Prozess?
       };
       % Branch
 
-        \gittag
-        [v0p1]       % node name
-        {erster commit}       % node text
-        {above=of A} % node placement
-        {A}          % target
-
       \gitbranch
         {master}     % node name and text
-        {above=of C} % node placement
+        {left=of C} % node placement
         {C}          % target
       % HEAD reference
       \gitHEAD
@@ -656,48 +639,104 @@ Wozu zweiphasiger Commit-Prozess?
 
       \gitbranch
         {bugfix}     % node name and text
-        {above=of E} % node placement
+        {left=of E} % node placement
         {E}
     \end{tikzpicture}
 } % end of only
 \only<4,6>{
-\vspace{6mm}
 \begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
       % Commit DAG
-      \gitDAG[grow right sep = 2em]{
+      \gitDAG[grow down sep = 1em]{
         A -- B --{
               C,
               D -- E,
         }
       };
 
-        \gittag
-        [v0p1]       % node name
-        {erster commit}       % node text
-        {above=of A} % node placement
-        {A}          % target
-
       % Branch
       \gitbranch
         {master}     % node name and text
-        {above=of C} % node placement
+        {left=of C} % node placement
         {C}          % target
       % HEAD reference
       \gitHEAD
-        {above=of bugfix} % node placement
+        {below=of bugfix} % node placement
         {bugfix}          % target
 
       \gitbranch
         {bugfix}     % node name and text
-        {above=of E} % node placement
+        {left=of E} % node placement
         {E}
     \end{tikzpicture}
 } % end of only
 \only<7>{
-\vspace{6mm}
 \begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
       % Commit DAG
-      \gitDAG[grow right sep = 2em]{
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitHEAD
+        {above=of D, xshift=1.5em} % node placement
+        {D}
+    \end{tikzpicture}
+} % end of only
+\only<8>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitbranch
+        {experiment}     % node name and text
+        {above=of D, xshift=1.5em} % node placement
+        {D}
+      % HEAD reference
+      \gitHEAD
+        {above=of experiment} % node placement
+        {experiment}          % target
+
+    \end{tikzpicture}
+} % end of only
+\only<9>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
         A -- B --{
               C,
               D --{ E,
@@ -706,34 +745,84 @@ Wozu zweiphasiger Commit-Prozess?
         }
       };
 
-        \gittag
-        [v0p1]       % node name
-        {erster commit}       % node text
-        {above=of A} % node placement
-        {A}          % target
 
       % Branch
       \gitbranch
         {master}     % node name and text
-        {above=of C} % node placement
+        {left=of C} % node placement
         {C}          % target
       \gitbranch
         {bugfix}     % node name and text
-        {above=of E} % node placement
+        {left=of E} % node placement
         {E}
 
       \gitbranch
         {experiment}     % node name and text
-        {above=of G} % node placement
+        {left=of G} % node placement
         {G}
       % HEAD reference
       \gitHEAD
-        {above=of experiment} % node placement
+        {left=of experiment} % node placement
         {experiment}          % target
 
     \end{tikzpicture}
 } % end of only
-\end{minipage}
+\column{0.65\textwidth}
+\begin{itemize}
+\item Unkompliziertes paralleles Arbeiten an verschieden Versionen
+\item<2-> Immer eine Revision ist aktiv \emph{\texttt{HEAD}}, der aktive Branch folgt \texttt{HEAD}
+\item<3-> beliebig viele Branches möglich
+\item<4-> Branch wechseln: \texttt{git checkout \only<4,6>{bugfix}\only<5>{master}\only<7,8,9>{<ref>}}
+\item<8-> neuer Branch auf \texttt{HEAD} erstellen: \texttt{git checkout -b experiment}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorie: Zusammenfassung Branches}
+\begin{columns}
+  \column{0.349\textwidth}
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D --{ E,
+                    F -- G,
+                  }
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitbranch
+        {experiment}     % node name and text
+        {left=of G} % node placement
+        {G}
+      % HEAD reference
+      \gitHEAD
+        {left=of experiment} % node placement
+        {experiment}          % target
+
+    \end{tikzpicture}
+
+  \column{0.65\textwidth}
+  \begin{center}
+    \Large Branches sind \emph{lokale} Lesezeichen auf Knoten im
+    Revisionsgraphen. Beim Anlegen eines neuen Commits folgt der aktive
+    Branch dem neuen \texttt{HEAD}.
+  \end{center}
+\end{columns}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
