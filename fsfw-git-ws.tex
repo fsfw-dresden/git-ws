@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{branches30}
+% \includeonlyframes{uebung10,uebung20,uebung30}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -879,7 +879,6 @@ Wozu zweiphasiger Commit-Prozess?
 \end{columns}
 \end{frame}
 
-c
 
 \begin{frame}[fragile,label=branches30]
 \frametitle{merge: Zusammenführen von Zweigen}
@@ -1047,23 +1046,137 @@ c
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{taskcounter}
 
-\begin{frame}[label=uebung10]
-\frametitle{Beispiel-Repo: lyrik}
+\begin{frame}[fragile,label=uebung10]
+\frametitle{Praxis}
 \begin{itemize}
  \item Bereitgestelltes nicht-trivials Repo URL:
- \item Basis für verschiedene Aufgaben
+ \item Basis für verschiedene Aufgaben (Anregungen zum Rumspielen)
 \begin{enumerate}
  \item Repo konen \texttt{git clone <url>}
- \item Überblick verschaffen
- \begin{enumerate}
-  \item Wie viele Commits, Committer,
+ \item Überblick verschaffen: \verb|gitk --all|
+ \begin{enumerate}[a)]
+  \item Wie viele Commits, Committer gibt es?
   \item Wie viele Branches?
  \end{enumerate}
+ \item Änderungen vornehmen
+ \begin{enumerate}[a)]
  \item zum Branch \textit{weimar} wechseln
- \item in Datei 
-
+ \item in Datei \verb|gedichte/prometheus.md| 'YYY' durch 'ich' ersetzen,
+ \item committen
+ \item analog im Branch \textit{london} \verb|sonnets/text1.md| 'XXX' durch 'thee' ersetzen
+ \end{enumerate}
+ \item commit-History einzelner Dateien anzeigen
+ \begin{enumerate}[a)]
+  \item \verb|git blame AUTHORS.md|
+  \item \verb|git blame sonnets/text1.md|
+ \end{enumerate}
+\setcounter{taskcounter}{\value{enumi}}
 \end{enumerate}
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile,label=uebung20]
+\frametitle{Praxis (2)}
+\begin{enumerate}
+ \setcounter{enumi}{\value{taskcounter}}
+
+ \item Änderungen anzeigen
+ \begin{enumerate}[a)]
+  \item ... seit dem vorletzten Commit: \verb|git diff HEAD~|
+  \item[$\rightarrow$] beliebige Änderungen vornehmen
+  \item ... seit dem letzten Commit: \verb|git diff|
+  \item[]
+  \item Grafische diff-Anzeige: \verb|diff| durch \verb|difftool| ersetzen
+  \item[] vorher: \verb|git config --global diff.tool kdiff3|
+  \end{enumerate}
+  \item Branch \textit{london} in \textit{master} mergen
+  \begin{enumerate}[a)]
+   \item master auschecken: \verb|git checkout master|
+   \item merge durchführen: \verb|git merge london|
+   \item Ergebnis anschauen: \verb|gitk --all|
+  \end{enumerate}
+
+ \setcounter{taskcounter}{\value{enumi}}
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile,label=uebung30]
+\frametitle{Praxis (3)}
+\begin{enumerate}
+ \setcounter{enumi}{\value{taskcounter}}
+
+  \item Irrelevante Dateien ignorieren
+  \begin{enumerate}[a)]
+   \item sicherstellen, dass \verb|git status| "`working directory clean"' liefert
+   \item Skript ausführen: \verb|python3 scripts/find-shortest-poem.py|
+   \item \verb|git status| $\rightarrow$ Hilfsdateien bemerken (\verb|__pycache__|)
+   \item[] {\scriptsize Häufig treten lokale Dateien auf, deren Änderungen nicht von git verfolgt werden sollen
+   $\rightarrow$ Datei \verb|.gitignore| hilft}
+   \item ignore-Datei anlegen: \verb|printf ".gitignore\nscripts/__pycache__/*" > .gitignore|
+   \item Zur Kenntnis nehmen: \verb|git status| $\rightarrow$ "`working directory clean"'
+  \end{enumerate}
+  \bigskip
+  \item[] Hinweis: Inhalt der Datei \verb|.gitignore|:
+  \begin{verbatim}
+   .gitignore
+   scripts/__pycache__/*
+  \end{verbatim}
+  \begin{itemize}
+  \item Bedeutung der Zeilen
+  \begin{enumerate}
+   \item Datei    \verb|.gitignore| selbst ignorieren
+   \item Alle Dateien im Unterverzeichnis \verb|scripts/__pycache__|
+  \end{enumerate}
+
+  \end{itemize}
+ \setcounter{taskcounter}{\value{enumi}}
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile,label=uebung40]
+\frametitle{Praxis (3)}
+\begin{enumerate}
+ \setcounter{enumi}{\value{taskcounter}}
+ \item Branch \textit{rom} in \textit{master} mergen
+ \begin{enumerate}[a)]
+ \item merge durchführen $\rightarrow$ Konflikt zur Kenntnis nehmen
+ \item Überblick verschaffen: \verb|git status|  \verb|gitk --all|
+ \item Manuell Konflikt in \verb|AUTHORS.md| beheben
+ \item Merge abschließen durch dommiten der Änderungen:\\
+ {\tiny \verb|git commit --add -m "merge branch rom after manual conflict resolution"|}
+ \end{enumerate}
+
+ \setcounter{taskcounter}{\value{enumi}}
+\end{enumerate}
+
+Weitere Ideen:
+\begin{itemize}
+ \item Eigenen Branch anlegen mit bestimmten Eltern-Knoten
+ \begin{itemize}
+  \item Commit-ID herausfinden: \verb|git log| (ersten 4 Zeichen reichen)
+  \item \verb|git checkout <id>|
+  \item \verb|git checkout -b mybranch|
+ \end{itemize}
+ \item Rebase aller Branches, so dass repo linear wird
+ \begin{itemize}
+  \item Hintergrundwissen: \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
+  \item \verb|git rebase master| eintippen, Animation anschauen und Text lesen
+ \end{itemize}
+
 
 \end{itemize}
 
@@ -1072,14 +1185,7 @@ c
 
 % # Notizen zur Aufgabenstellung:
 %
-% repo klonen
-% Überblick verschaffen (gitk --all)
-% zum Branch weimar wechseln und 'YYY' durch 'ich' ersetzen
-% zum Branch london wechseln und 'XXX' durch 'thee' ersetzen, commiten
-% mit git blame herausfinden, wann welche Zeile von wem zuletzt editiert wurde
-%  git blame AUTHORS.md
-%  git blame sonnets/text1.md
-%
+
 % Änderrungen seit dem vorletzten commit anzeigen: git diff HEAD~
 % Manuelle Änderungen vornehmen
 % Änderungen seit dem letzten commit anzeigen
