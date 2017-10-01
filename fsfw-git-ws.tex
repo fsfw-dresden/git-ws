@@ -412,8 +412,36 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Git Einführung (mit Praxis)}
+\begin{frame}
+\frametitle{Einführung in git – Was ist ein Repo?}
+\begin{columns}
+  \column{0.245\textwidth}
+  \begin{tikzpicture}
+    \gitDAG[grow down sep = 1em]{
+      A -- B -- C
+    };
+    \gitbranch{master}{left=of C}{C};
+    \gitHEAD{above=of master}{master}
+    \SAandWT
+  \end{tikzpicture}
+  \column{0.75\textwidth}
+  \begin{itemize}
+  \item gerichteter, azyklischer Graph von Versionen
+    (\emph{revisions}) einer Ordnerstruktur und deren Inhalt mit
+    Metadaten (\emph{Commit-ID}, Autor, Beschreibungstext)
+  \item Commit-ID abgeleitet aus dem Inhalt und dem Graphen
+    (kryptographische Hash-Funktion)
+  \item \emph{\texttt{HEAD}}: Knoten im Graphen; momentaner
+    Bezugspunkt für Operationen
+  \item \emph{refs}: referenzieren Knoten im Graphen (Beispiele:
+    \texttt{HEAD}, \texttt{HEAD\^}, \texttt{master}, per abgekürzter
+    Commit-ID \texttt{f23faaa})
+  \end{itemize}
+\end{columns}
+\end{frame}
+
 \begin{frame}[label=gitintro10]
-\frametitle{Einführung in git}
+\frametitle{Einführung in git – Verwendung}
 \begin{itemize}
  \item Wir empfehlen: git Bedienung via Kommandozeile
    %% NOTES:
