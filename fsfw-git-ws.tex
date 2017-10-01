@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{uj}
+% \includeonlyframes{branches10}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -17,6 +17,13 @@
   positioning,
   calc,
 }
+
+\usepackage{gitdags}
+% Zum Zeichnen von git-Graphen
+% https://tex.stackexchange.com/a/198345/2381
+% hängt ab von xcolor-solarized
+% Zur Vermeidung von Komplierungsschwierigkeiten liegen xcolor-solarized.sty
+% und gitdags.sty direkt im Hauptverzeichnis
 
 \usepackage{lmodern}
 
@@ -67,7 +74,7 @@
  \vspace{10mm}
 \structure{\Huge  <Eigenwerbung>}
 \end{center}
- 
+
 \end{frame}
 
 
@@ -154,13 +161,13 @@
         \item WIP!
        \end{itemize}
 
-       
-       
+
+
       \end{itemize}
 
     }
   \end{textblock*}
-  
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -225,7 +232,7 @@
  \vspace{10mm}
 \structure{\Huge  </Eigenwerbung>}
 \end{center}
- 
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -244,14 +251,14 @@
 \begin{itemize}
   \item Projekte bestehen aus schrittweisen Änderungen
   \item Bedürfnis, zu vorherigem Zustand zurückkehren zu können
-  
+
   \begin{itemize}
 \item  ("`Savegame"')
     \end{itemize}
 
   \item Naiver Ansatz: \hspace{10mm}
   \raisebox{-0.5\height}{\includegraphics[width=40mm]{img-src/my-software-dirs}}
-  
+
   \item Probleme:
   \begin{itemize}
    \item Speicherplatz
@@ -432,12 +439,12 @@
   \item \texttt{git blame myscript.py}
   \item \texttt{git diff}
   \item \texttt{git difftool}
-  
+
  \end{itemize}
 \end{itemize}
 
 \begin{textblock*}{\textwidth}[0.5,0.](120mm, 60mm)
- 
+
 \visible<3->{
 \begin{itemize}
  \item[] ~
@@ -447,7 +454,7 @@
   \item \texttt{git help <command>}
   \item \texttt{git rebase} \\[2mm]
   \item \texttt{git config}
-  
+
   \item \texttt{gitk}
 
 \end{itemize}
@@ -554,7 +561,7 @@ Wozu zweiphasiger Commit-Prozess?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=gitintro40]
-\frametitle{Praxis: Änderungen committen}
+\frametitle{Praxis 2: Änderungen committen}
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
@@ -562,25 +569,314 @@ Wozu zweiphasiger Commit-Prozess?
  \item \texttt{git status}
  \item \texttt{git add README.md} \qquad \visible<2->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
  \item \texttt{git status}
- \item \texttt{git commit -m "{}New content of README"{}}
+ \item \texttt{git commit -m "{}New content ofREADME"{}} \quad \visible<4->{{\scriptsize Fehler absichtlich}}
  \item \texttt{git status}
 \end{itemize}
  \bigskip
+ \pause
  \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
  \item \texttt{git status}
  \item \texttt{git log}
  \end{itemize}
- \pause 
+ \pause
  \item Letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
  \begin{itemize}
  \item  \texttt{git config -{}-global core.editor mcedit}
  \item \texttt{git commit -{}-amend}
  \end{itemize}
 \end{itemize}
- 
+
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=branches10]
+\frametitle{Theorie: Branches}
+\begin{columns}
+\column{0.349\textwidth}
+\only<1,2>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B -- C
+      };
+      % Branch
+
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      % HEAD reference
+      \gitHEAD
+        {above=of master} % node placement
+        {master}          % target
+    \end{tikzpicture}
+}
+\only<3,5>{
+\begin{tikzpicture}
+     \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+      % Branch
+
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      % HEAD reference
+      \gitHEAD
+        {above=of master} % node placement
+        {master}          % target
+
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+    \end{tikzpicture}
+} % end of only
+\only<4,6>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      % HEAD reference
+      \gitHEAD
+        {below=of bugfix} % node placement
+        {bugfix}          % target
+
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+    \end{tikzpicture}
+} % end of only
+\only<7>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitHEAD
+        {above=of D, xshift=1.5em} % node placement
+        {D}
+    \end{tikzpicture}
+} % end of only
+\only<8>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D -- E,
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitbranch
+        {experiment}     % node name and text
+        {above=of D, xshift=1.5em} % node placement
+        {D}
+      % HEAD reference
+      \gitHEAD
+        {above=of experiment} % node placement
+        {experiment}          % target
+
+    \end{tikzpicture}
+} % end of only
+\only<9>{
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D --{ E,
+                    F -- G,
+                  }
+        }
+      };
+
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitbranch
+        {experiment}     % node name and text
+        {left=of G} % node placement
+        {G}
+      % HEAD reference
+      \gitHEAD
+        {left=of experiment} % node placement
+        {experiment}          % target
+
+    \end{tikzpicture}
+} % end of only
+\column{0.65\textwidth}
+\begin{itemize}
+\item Unkompliziertes paralleles Arbeiten an verschieden Versionen
+\item<2-> Immer eine Revision ist aktiv \emph{\texttt{HEAD}}, der aktive Branch folgt \texttt{HEAD}
+\item<3-> beliebig viele Branches möglich
+\item<4-> Branch wechseln: \texttt{git checkout \only<4,6>{bugfix}\only<5>{master}\only<7,8,9>{<ref>}}
+\item<8-> neuer Branch auf \texttt{HEAD} erstellen: \texttt{git checkout -b experiment}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorie: Zusammenfassung Branches}
+\begin{columns}
+  \column{0.349\textwidth}
+\begin{tikzpicture}
+      \useasboundingbox (-1.5,-4.5) rectangle +(4,4.5);
+
+      % Commit DAG
+      \gitDAG[grow down sep = 1em]{
+        A -- B --{
+              C,
+              D --{ E,
+                    F -- G,
+                  }
+        }
+      };
+
+      % Branch
+      \gitbranch
+        {master}     % node name and text
+        {left=of C} % node placement
+        {C}          % target
+      \gitbranch
+        {bugfix}     % node name and text
+        {left=of E} % node placement
+        {E}
+
+      \gitbranch
+        {experiment}     % node name and text
+        {left=of G} % node placement
+        {G}
+      % HEAD reference
+      \gitHEAD
+        {left=of experiment} % node placement
+        {experiment}          % target
+
+    \end{tikzpicture}
+
+  \column{0.65\textwidth}
+  \begin{center}
+    \Large Branches sind \emph{lokale} Lesezeichen auf Knoten im
+    Revisionsgraphen. Beim Anlegen eines neuen Commits folgt der aktive
+    Branch dem neuen \texttt{HEAD}.
+  \end{center}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% noch nich fertig/sinnvoll
+% \begin{frame}[label=komplex10]
+% \frametitle{Beispiel-Repo: lyrik}
+% \begin{itemize}
+%  \item Bereitgestelltes nicht-trivials Repo URL:
+%  \item Basis für verschiedene Aufgaben
+% \begin{enumerate}
+%  \item Repo konen \texttt{git clone <url>}
+%  \item Überblick verschaffen
+%  \begin{enumerate}
+%   \item Wie viele Commits, Committer
+%   Branches?
+%
+%  \end{enumerate}
+%
+% \end{enumerate}
+%
+% \end{itemize}
+%
+% \end{frame}
+
+
+% # Notizen zur Aufgabenstellung:
+%
+% repo klonen
+% Überblick verschaffen (gitk --all)
+% zum Branch weimar wechseln und 'YYY' durch 'ich' ersetzen
+% zum Branch london wechseln und 'XXX' durch 'thee' ersetzen, commiten
+% mit git blame herausfinden, wann welche Zeile von wem zuletzt editiert wurde
+%  git blame AUTHORS.md
+%  git blame sonnets/text1.md
+%
+% Änderrungen seit dem vorletzten commit anzeigen: git diff HEAD~
+% Manuelle Änderungen vornehmen
+% Änderungen seit dem letzten commit anzeigen
+%
+% Optional: git difftool dazu verwenden
+%
+% Branch london in branch master mergen
+% Branch weimar in branch master mergen
+%
+% ausführen: python3 scripts/find-shortest-poem
+% git status -> Problem mit __pycache__
+% passende .gitignore Datei anlegen
+%
+% Branch rom in branch master mergen -> Manuellen Konflikt beheben.
+%
+%
+% Für Fortgeschrittene: das ganze repo mittels git rebase zu einem unverzwiegten umwandeln
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -588,16 +884,16 @@ Wozu zweiphasiger Commit-Prozess?
 \frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
 \begin{itemize}
 \item diff / difftool
-\item branches
-\item Visualisierung eines repos (Graph mit Pfeilen)
-\item hash, HEAD
-\item merge (Konflikte),  erwähnen: push, fast-forward, rebase, 
-\item branching model
+\item branches \checkmark
+\item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
+\item HEAD\checkmark , hash
+\item merge (Konflikte),  erwähnen: push, fast-forward, rebase,
 \item .gitignore
 \item github $\neq$ git
 \item git nicht gut für Binärdateien
 \item bash extension
 \item aliase in .gitconfig
+\item link auf branching model
 \item globale gitignore
 
 \end{itemize}
@@ -609,12 +905,12 @@ Wozu zweiphasiger Commit-Prozess?
 Weitere Ressourcen:
 \tiny
 \begin{itemize}
- \item 
+ \item
 \url{https://learn.adafruit.com/an-introduction-to-collaborating-with-version-control/initializing-a-repository-and-making-commits}
 \item ...
 \end{itemize}
 
- 
+
 \end{frame}
 
 
