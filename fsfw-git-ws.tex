@@ -1072,9 +1072,9 @@ Wozu zweiphasiger Commit-Prozess?
 \frametitle{Praxis}
 \begin{itemize}
  \item Bereitgestelltes nicht-trivials Repo URL:
- \item Basis für verschiedene Aufgaben (Anregungen zum Rumspielen)
+ \item Basis für verschiedene Aufgaben (Anregungen zum spielen)
 \begin{enumerate}
- \item Repo konen \texttt{git clone <url>}
+ \item Repo klonen \texttt{git clone <url>}
  \item Überblick verschaffen: \verb|gitk --all|
  \begin{enumerate}[a)]
   \item Wie viele Commits, Committer gibt es?
@@ -1145,25 +1145,18 @@ Wozu zweiphasiger Commit-Prozess?
    \item \verb|git status| $\rightarrow$ Hilfsdateien bemerken (\verb|__pycache__|)
    \item[] {\scriptsize Häufig treten lokale Dateien auf, deren Änderungen nicht von git verfolgt werden sollen
    $\rightarrow$ Datei \verb|.gitignore| hilft}
-   \item ignore-Datei anlegen: \verb|printf ".gitignore\nscripts/__pycache__/*" > .gitignore|
+   \item ignore-Datei anlegen: \verb|echo "__pycache__" >> .gitignore|
+   \item \verb|.gitignore| comitten: \\ \verb|git add .gitignore; git commit -m "add gitignore"|
    \item Zur Kenntnis nehmen: \verb|git status| $\rightarrow$ "`working directory clean"'
   \end{enumerate}
-  \bigskip
-  \item[] Hinweis: Inhalt der Datei \verb|.gitignore|:
-  \begin{verbatim}
-   .gitignore
-   scripts/__pycache__/*
-  \end{verbatim}
-  \begin{itemize}
-  \item Bedeutung der Zeilen
-  \begin{enumerate}
-   \item Datei    \verb|.gitignore| selbst ignorieren
-   \item Alle Dateien im Unterverzeichnis \verb|scripts/__pycache__|
-  \end{enumerate}
-
-  \end{itemize}
  \setcounter{taskcounter}{\value{enumi}}
 \end{enumerate}
+
+\begin{itemize}
+\item Jede Zeile in \verb|.gitingore| ist ein Muster für einen Dateinamen
+\item Unterstützt wildcard $*$
+\item sonst ganze Pfadkomponenten
+\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1176,7 +1169,7 @@ Wozu zweiphasiger Commit-Prozess?
  \item merge durchführen $\rightarrow$ Konflikt zur Kenntnis nehmen
  \item Überblick verschaffen: \verb|git status|  \verb|gitk --all|
  \item Manuell Konflikt in \verb|AUTHORS.md| beheben
- \item Merge abschließen durch dommiten der Änderungen:\\
+ \item Merge abschließen durch commiten der Änderungen:\\
  {\tiny \verb|git commit --add -m "merge branch rom after manual conflict resolution"|}
  \end{enumerate}
 
@@ -1196,11 +1189,10 @@ Weitere Ideen:
   \item Hintergrundwissen:
   \begin{itemize}
    \item  \verb|git help rebase|
-\item \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
+\item \url{https://onlywei.github.io/explain-git-with-d3/#rebase}
   \item dort \verb|git rebase master| eintippen, Animation anschauen und Text lesen
   \end{itemize}
  \end{itemize}
-
 
 \end{itemize}
 
@@ -1221,6 +1213,7 @@ Weitere Ideen:
 \pause
 \item git nicht gut für (große) Binärdateien
 \begin{itemize}
+ \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
  \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
 \end{itemize}
@@ -1240,8 +1233,6 @@ Weitere Ideen:
 \item Globale gitignore-Datei: Link
 \item Bewährtes Branching-Modell anwenden: Link
 \end{itemize}
-
-
 
 \end{itemize}
 \end{frame}
@@ -1292,7 +1283,6 @@ Weitere Ressourcen:
 \item link auf branching model \checkmark
 \item globale gitignore \checkmark
 \item Werbung am Anfang kürzen und aktualisieren
-
 \end{itemize}
 \end{frame}
 
