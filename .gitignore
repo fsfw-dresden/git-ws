@@ -10,3 +10,4 @@
 *.blg
 *.out
 *.tex.backup
+tmp/*

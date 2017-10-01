@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{branches10}
+\includeonlyframes{gitintro40}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -590,32 +590,55 @@ Wozu zweiphasiger Commit-Prozess?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=gitintro40]
-\frametitle{Praxis 2: Änderungen committen}
+\frametitle{Praxis: minimales Repo}
+\vspace{-5mm}
+\begin{columns}
+% Trick: durch Einfügen einer weiteren Spalte wird die 1. Spalte nach links gedrückt
+\column[t]{1.0\textwidth}
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
- \item \texttt{echo "{}Hallo Welt"{} > README.md}
+ \item \texttt{printf "{}Hallo\textbackslash{}nWelt\textbackslash{}n"{} > README.md}
  \item \texttt{git status}
- \item \texttt{git add README.md} \qquad \visible<2->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
+ \item \texttt{git add README.md} \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
  \item \texttt{git status}
- \item \texttt{git commit -m "{}New content ofREADME"{}} \quad \visible<4->{{\scriptsize Fehler absichtlich}}
+ \item \texttt{git commit -m "{}New content of README"{}} %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
  \item \texttt{git status}
 \end{itemize}
- \bigskip
+\pause
+ \item Änderungen durchführen, anzeigen und committen
+\begin{itemize}
+ \item \texttt{sed -i {-}{-} '{}s/Welt/Leute/g{}' README.md}
+ \item \texttt{git diff}
  \pause
+ \pause
+ \item \texttt{git commit --add -m "{}change Hello-message"{}}
+\end{itemize}
  \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
  \item \texttt{git status}
  \item \texttt{git log}
+ \item \texttt{gitk}
  \end{itemize}
- \pause
- \item Letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
- \begin{itemize}
- \item  \texttt{git config -{}-global core.editor mcedit}
- \item \texttt{git commit -{}-amend}
- \end{itemize}
+%  \pause
+%  \item Letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
+%  \begin{itemize}
+%  \item  \texttt{git config -{}-global core.editor mcedit}
+%  \item \texttt{git commit -{}-amend}
+%  \end{itemize}
 \end{itemize}
+
+\column[t]{0.1\textwidth}
+~
+\end{columns}
+
+
+\begin{textblock*}{1cm}[0.,0.](95mm,53mm)
+\visible<3->{
+\includegraphics[height=15mm]{img-src/git-diff-snapshot}
+}
+\end{textblock*}
 
 \end{frame}
 
