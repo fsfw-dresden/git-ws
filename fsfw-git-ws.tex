@@ -612,7 +612,7 @@ Wozu zweiphasiger Commit-Prozess?
  \item \texttt{git diff}
  \pause
  \pause
- \item \texttt{git commit --add -m "{}change Hello-message"{}}
+ \item \verb|git commit -am "change Hello-message"|
 \end{itemize}
  \pause
  \item Sich Überblick verschaffen
@@ -881,7 +881,7 @@ Wozu zweiphasiger Commit-Prozess?
 
 
 \begin{frame}[fragile,label=branches30]
-\frametitle{merge: Zusammenführen von Zweigen}
+\frametitle{Theorie: Mergen – Zusammenführen von Zweigen}
 \begin{columns}
 \column{0.39\textwidth}
 \only<1>{
@@ -1038,12 +1038,32 @@ Wozu zweiphasiger Commit-Prozess?
  \pause
  \item Automatische Konfliktlösung ziemlich gut
  \item Gelegentlich manueller Eingriff notwendig
-\end{itemize}
-
+ \end{itemize}
 \end{itemize}
 \end{columns}
 
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Theorie: Mergen – Konflikte auflösen}
+  \begin{itemize}
+  \item Konflikte beim Mergen: beide Versionen werden in der Datei markiert eingefügt\\
+    \hspace*{2em}\texttt{Gleiche Zeilen 1,} \\
+    \hspace*{2em}\texttt{<{}<{}<{}<{}<{}<{}< HEAD} \\
+    \hspace*{2em}\texttt{in unserem Zweig geänderte Zeilen,} \\
+    \hspace*{2em}\texttt{=======} \\
+    \hspace*{2em}\texttt{im anderen Zweig geänderte Zeile,} \\
+    \hspace*{2em}\texttt{>{}>{}>{}>{}>{}>{}> other-branch} \\
+    \hspace*{2em}\texttt{Gleiche Zeilen 2}
+  \item manuell editieren um den Konflikt aufzuheben (z.\,B. beide
+    Zeilen behalten, die Änderungen in beiden Zeilen zusammenführen,
+    eine Version behalten), die Marker entfernen
+  \item \texttt{git add <conflicting-file>}
+  \item \texttt{git commit}
+  \end{itemize}
+\end{frame}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcounter{taskcounter}
@@ -1181,6 +1201,28 @@ Weitere Ideen:
 \end{itemize}
 
 \end{frame}
+
+
+% noch nich fertig/sinnvoll
+% \begin{frame}[label=komplex10]
+% \frametitle{Beispiel-Repo: lyrik}
+% \begin{itemize}
+%  \item Bereitgestelltes nicht-trivials Repo URL:
+%  \item Basis für verschiedene Aufgaben
+% \begin{enumerate}
+%  \item Repo konen \texttt{git clone <url>}
+%  \item Überblick verschaffen
+%  \begin{enumerate}
+%   \item Wie viele Commits, Committer
+%   Branches?
+%
+%  \end{enumerate}
+%
+% \end{enumerate}
+%
+% \end{itemize}
+%
+% \end{frame}
 
 
 % # Notizen zur Aufgabenstellung:
