@@ -26,18 +26,19 @@
 \usepackage{pdflscape}
 \usepackage{multicol}
 \usepackage{vmargin}
+\usepackage{hyperref}
 
 \usepackage[table]{xcolor}
 
 \setmarginsrb{1.1cm}{1.0cm}% left, top
-		      {1.1cm}{1.0cm}% right, down
+		      {1.0cm}{1.0cm}% right, down
                 	      {7mm}{0.5cm}% head: height, distance
 	               {7mm}{0.5cm}% foot: height, distance
 
 % Set column space
 \setlength{\columnsep}{0.25em}
 
-% Define colours
+% Define colours – todo: use fsfw-colour scheme
 \definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
 \definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
 \definecolorset{hsb}{}{}{magenta,.9,.4,0.95;green2,.29,.4,0.95}
@@ -47,14 +48,14 @@
 \renewcommand{\section}{\@startsection{section}{1}{0mm}
 	{-1.7ex}{0.7ex}{\normalfont\large\bfseries}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}
-	{-1.7ex}{0.5ex}{\normalfont\normalsize\bfseries}}
+	{-0.0ex}{0.5ex}{\normalfont\normalsize\bfseries}}
 \makeatother
 
 % No section numbers
 \setcounter{secnumdepth}{0}
 
 % set Version
-\newcommand{\Version}[0]{1.5}
+\newcommand{\Version}[0]{1.0}
 
 % No indentation
 \setlength{\parindent}{0em}
@@ -63,11 +64,13 @@
 \pagestyle{empty}
 
 % set own shortcuts
-\newcommand{\cmdline}[1] {
+\newcommand{\sourcetext}[1] {
 	\begin{tabularx}{\hsize}{X}
-			{#1}
+			{\tt #1}
 	\end{tabularx}
 }
+
+\newcommand{\cmdline}[1] {\sourcetext{\$ #1}}
 
 \newcommand{\colouredbox}[2] {
 	\colorbox{#1!40}{
@@ -78,163 +81,170 @@
 			}
 		\end{minipage}
 	}
+        \vspace{1mm}
+}
+
+\newcommand{\annotation}[1] {
+  \parbox{\textwidth}{\raggedleft #1}\par
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\begin{landscape}
-
-\begin{multicols}{3}
+\begin{multicols}{2}
 [\begin{center}\section{ Git Cheat Sheet Volume 1}\end{center}]
+%% configure your settings for git
+\colouredbox{yellow}{
+	\begin{center}\section{Configuring git}\end{center}
+	\cmdline{git config [-{}-global] [option]}
+	\annotation{with \texttt{-{}-global} it is stored in \texttt{$\tilde{\ }$/.gitconfig}}
+	\subsection{Information about the user}
+		\sourcetext{user.name NAME}
+		\sourcetext{user.email EMAIL}
+	\subsection{Enabling coloured output}
+		\sourcetext{color.ui auto}
+        \subsection{Improve interactive user-experience}
+                \sourcetext{interactive.singlekey true}
+}
 
 %% Create git Repositories
 \colouredbox{magenta}{
-	\begin{center}\section{Create}\end{center}
+	\begin{center}\section{Creating or cloning repositories}\end{center}
 	\subsection{From existing data}
-		\cmdline{cd \ $\tilde{}$/my\_project\_dir}\\
-		\cmdline{\$ git init}\\
-		\cmdline{\$ git add .}
+		\cmdline{cd \ my\_project\_dir}\\
+		\cmdline{git init}\\
+		\cmdline{git add .}
+                \cmdline{git commit -m 'initial commit'}
 	\subsection{From existing repo}
-		\cmdline{\$ git clone \ $\tilde{}$/existing/repo \ $\tilde{}$/new/repo}\\
-		\cmdline{\$ git clone you@host.de:dir/project.git}\\
-		\cmdline{\$ git clone http://[USER@]host.de/project.git}
+		\cmdline{git clone path/to/existing/repo path/to/new/repo}\\
+		\cmdline{git clone you@host.de:dir/project.git}\\
+		\cmdline{git clone http://[USER@]host.de/project.git}
 }
 
 %% Browse through files/repository
 \colouredbox{purple}{
-	\begin{center}\section{Browse}\end{center}
+	\begin{center}\section{Getting information}\end{center}
 	\subsection{Files changed in working directory}
-		\cmdline{\$ git status}
+		\cmdline{git status}
 	\subsection{Changes of tracked files}
-		\cmdline{\$ git diff}
+		\cmdline{git diff}
 	\subsection{Changes between ID1 and ID2}
-		\cmdline{\$ git diff $<$ID1$>$ $<$ID2$>$}
+		\cmdline{git diff $<$ID1$>$ $<$ID2$>$}
 	\subsection{History of changes}
-		\cmdline{\$ git log}
+		\cmdline{git log}
+                \cmdline{gitk}
 }
 
 %% Commit your changes
 \colouredbox{red}{
-	\begin{center}\section{Commit}\end{center}
-	\subsection{Commit all local changes}
-		\cmdline{\$ git commit -a}
-	\subsection{Commit all local changes and add message}
-		\cmdline{\$ git commit -am \glqq $<$message$>$\grqq}
+	\begin{center}\section{Working with the Index and committing changes}\end{center}
+        \subsection{Add all changes in a file or directory to the index}
+                \cmdline{git add path/to/add}
+        \subsection{Interactively select changes for addition/committing}
+                 \cmdline{git add -p [path/to/preselect/changes]}
+                 \cmdline{git commit -p}
+        \subsection{Commit changes added to the index}
+                \cmdline{git commit}
+	\subsection{Add and commit all local changes}
+		\cmdline{git commit -a}
+	\subsection{Commit changes without editing the message}
+		\cmdline{git commit -m "<message>"}
 }
 
-%% Git tips to handle things
-\colouredbox{gray}{
-	\begin{center}\section{Useful tips}\end{center}
-	\subsection{Documentation/help}
-		\cmdline{\$ git help [command]}
-		\cmdline{\$ man git-[command]}
-	\subsection{Push branch to remote}
-		\cmdline{\$ git push $<$origin$>$ $<$branch$>$}
-	\subsection{Delete branch (locally and remote)}
-		\cmdline{\$ git branch -d $<$branch$>$}
-		\cmdline{\$ git push $<$origin$>$ :$<$branch$>$}
-	\subsection{Change not pushed commits untill ID}
-		\cmdline{\$ git rebase -i $<$ID$>$}
+%% How to handle branches
+\colouredbox{orange}{
+	\begin{center}\section{Working with Branches}\end{center}
+	\subsection{List all branches}
+		\cmdline{git branch}
+                \cmdline{git branch -a}
+                \annotation{list remote branches as well}
+	\subsection{Switch to a branch}
+		\cmdline{git checkout <branch>}
+	\subsection{Merge Branch B1 into B2}
+		\cmdline{git checkout <B2>}
+		\cmdline{git merge <B1>}
+                \annotation{or}
+		\cmdline{git merge -{}-no-ff -m "Message" <B1>}
+		\annotation{generates commit even if fast-forwarding is possible}
+	\subsection{Create Branch based on HEAD and checkout}
+		\cmdline{git checkout -b <branch>}
+	\subsection{Delete a branch}
+		\cmdline{git branch -d <branch>}
+		\cmdline{git branch -D <branch>}
+                \annotation{Delete a branch that is not merged to the default branch}
+}
+
+
+%% how to update repository
+\colouredbox{pink}{
+	\begin{center}\section{Get changes from upstream}\end{center}
+	\subsection{Fetch changes from a remote}
+		\cmdline{git fetch [remote]}
+                \annotation{\texttt{remote} defaults to \texttt{origin}}
+        \subsection{Get changes}
+                \cmdline{git pull [remote] [refspec]}
+                \annotation{\texttt{remote} defaults to \texttt{origin}}
+}
+
+
+%% Resolve merge conflicts
+% \colouredbox{gray}{
+% 	\begin{center}\section{Resolve merge conflicts}\end{center}
+% 	\subsection{View merge conflicts}
+% 		\cmdline{git diff}
+% 	\subsection{View merge conflicts against base file}
+% 		\cmdline{git diff -{}-base <FILE>}
+% 	\subsection{View merge conflicts against other changes}
+% 		\cmdline{git diff -{}-theirs <FILE>}
+% 	\subsection{View merge conflicts against your changes}
+% 		\cmdline{git diff -{}-ours <FILE>}
+% 	\subsection{After resolving conflicts, merge with}
+% 		\cmdline{git add <CONFLICTING\_FILE>}\\
+%                 \cmdline{git commit}
+% }
+
+%% Publish your changes
+\colouredbox{blue}{
+	\begin{center}\section{Publishing changes}\end{center}
+	\subsection{Push changes to a remote}
+		\cmdline{git push [origin] [branch]}
+	\subsection{Create tags}
+		\cmdline{git tag [-s] <tag name>}
+                \annotation{with \texttt{-s} the tag is signed with GPG}
+	\subsection{Prepare a patch}
+		\cmdline{git format-patch origin}
 }
 
 %% Revert changes
 \colouredbox{green}{
 	\begin{center}\section{Revert}\end{center}
-	\subsection{Revert the last commit}
-		\cmdline{\$ git revert HEAD}
 	\subsection{Return to last committed state}
-		\cmdline{\$ git checkout -f | git reset --hard}
+		\cmdline{git reset -{}-hard}
 	\subsection{Revert specific commit}
-		\cmdline{\$ git revert $<$ID$>$}
+		\cmdline{git revert <ID>}
 	\subsection{fix/change last commit}
-		\cmdline{\$ git commit $--$amend}		
+		\cmdline{git commit -{}-amend}
 }
 
-%% How to handle branches
-\colouredbox{orange}{
-	\begin{center}\section{branch}\end{center}
-	\subsection{List all branches (locally and remote)}
-		\cmdline{\$ git branch -a}
-	\subsection{Switch to BRANCH}
-		\cmdline{\$ git checkout BRANCH}
-	\subsection{Merge Branch B1 into B2}
-		\cmdline{\$ git checkout $<$B2$>$}\\
-		\cmdline{\$ git merge $<$B1$>$}\\
-		\cmdline{\$ git merge --no-ff -m \glqq Message\grqq}\\
-		\hspace*{30mm}\textbf{generates commit even as --ff option}\\
-		\cmdline{\$ git merge --squash}\\
-		\hspace*{30mm}\textbf{merge without generated commit}
-	\subsection{Create Branch based on HEAD}
-		\cmdline{\$ git branch $<$branch$>$}
-	\subsection{Create Branch based on HEAD and checkout}
-		\cmdline{\$ git checkout -b $<$branch$>$} 
-	\subsection{Create Branch based on another}
-		\cmdline{\$ git branch $<$new$>$ $<$branch$>$}
-	\subsection{Delete a branch}
-		\cmdline{\$ git branch -d $<$branch$>$}
-}
-
-%% how to update repository
-\colouredbox{pink}{
-	\begin{center}\section{Update}\end{center}
-	\subsection{Fetch latest changes from origin}
-		\cmdline{\$ git fetch}
-	\subsection{see if something changed}
-		\cmdline{\$ git remote update}
-}
-
-%% Resolve merge conflicts
+%% Git tips to handle things
 \colouredbox{gray}{
-	\begin{center}\section{Resolve merge conflicts}\end{center}
-	\subsection{View merge conflicts}
-		\cmdline{\$ git diff}
-	\subsection{View merge conflicts against base file}
-		\cmdline{\$ git diff --base $<$FILE$>$}
-	\subsection{View merge conflicts against other changes}
-		\cmdline{\$ git diff $--$theirs $<$FILE$>$}
-	\subsection{View merge conflicts against your changes}
-		\cmdline{\$ git diff $--$ours $<$FILE$>$}
-	\subsection{After resolving conflicts, merge with}
-		\cmdline{\$ git add $<$CONFLICTING\_FILE$>$}\\
-		\cmdline{\$ git rebase $--$continue}
+	\begin{center}\section{Misc}\end{center}
+	\subsection{Documentation/help}
+		\cmdline{git help [command]}
+		\cmdline{man git-[command]}
+	\subsection{Delete branch (locally and remote)}
+		\cmdline{git branch -d <branch>}
+		\cmdline{git push <origin> :<branch>}
+	\subsection{Beautify non-pushed history interactively}
+		\cmdline{git rebase -i <ID>}
 }
-
-%% Publish your changes
-\colouredbox{blue}{
-	\begin{center}\section{Publish}\end{center}
-	\subsection{Push changes to origin}
-		\cmdline{\$ git push [origin] [branch]}
-	\subsection{Make a Version}
-		\cmdline{\$ git tag $<$version\_name$>$}
-	\subsection{Prepare a patch}
-		\cmdline{\$ git format-patch origin}
-}
-
-%% configure your settings for git
-\colouredbox{yellow}{
-	\begin{center}\section{Configuration}\end{center}
-	\cmdline{\$ git config [$--$global] [option]}\\
-	\hspace*{39mm}\textbf{global is stored in \ $\tilde{}$/.gitconfig}\\
-	\subsection{user}
-		\cmdline{user.name NAME}
-		\cmdline{user.email EMAIL}
-	\subsection{color}
-		\cmdline{color.ui auto}
-	\subsection{optimisation}
-		\cmdline{packs.threads 0}
-		\cmdline{diff.renamelimit 0}
-}
+\end{multicols}
 \begin{center}
 \footnotesize
-\rule{0.7\linewidth}{0.25pt}
-\par Date: \today \ - Version \Version\\
-Author: Max Oberberger (github@oberbergers.de)\\
-https://github.com/chiemseesurfer/latex-gitCheatSheet
+\rule{0.9\linewidth}{0.25pt}
+\par fsfw git CheatSheet – Date: \today \ - Version \Version\
+based on \url{https://github.com/chiemseesurfer/latex-gitCheatSheet} Version 1.5
+by Max Oberberger (\texttt{github@oberbergers.de})
 \end{center}
-
-\end{multicols}
-
-\end{landscape}
 \end{document}
