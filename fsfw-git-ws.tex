@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{uebung10,uebung20,uebung30}
+% \includeonlyframes{schluss10}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -1193,8 +1193,12 @@ Weitere Ideen:
  \end{itemize}
  \item Rebase aller Branches, so dass repo linear wird
  \begin{itemize}
-  \item Hintergrundwissen: \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
-  \item \verb|git rebase master| eintippen, Animation anschauen und Text lesen
+  \item Hintergrundwissen:
+  \begin{itemize}
+   \item  \verb|git help rebase|
+\item \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
+  \item dort \verb|git rebase master| eintippen, Animation anschauen und Text lesen
+  \end{itemize}
  \end{itemize}
 
 
@@ -1202,76 +1206,63 @@ Weitere Ideen:
 
 \end{frame}
 
-
-% noch nich fertig/sinnvoll
-% \begin{frame}[label=komplex10]
-% \frametitle{Beispiel-Repo: lyrik}
-% \begin{itemize}
-%  \item Bereitgestelltes nicht-trivials Repo URL:
-%  \item Basis für verschiedene Aufgaben
-% \begin{enumerate}
-%  \item Repo konen \texttt{git clone <url>}
-%  \item Überblick verschaffen
-%  \begin{enumerate}
-%   \item Wie viele Commits, Committer
-%   Branches?
-%
-%  \end{enumerate}
-%
-% \end{enumerate}
-%
-% \end{itemize}
-%
-% \end{frame}
-
-
-% # Notizen zur Aufgabenstellung:
-%
-
-% Änderrungen seit dem vorletzten commit anzeigen: git diff HEAD~
-% Manuelle Änderungen vornehmen
-% Änderungen seit dem letzten commit anzeigen
-%
-% Optional: git difftool dazu verwenden
-%
-% Branch london in branch master mergen
-% Branch weimar in branch master mergen
-%
-% ausführen: python3 scripts/find-shortest-poem
-% git status -> Problem mit __pycache__
-% passende .gitignore Datei anlegen
-%
-% Branch rom in branch master mergen -> Manuellen Konflikt beheben.
-%
-%
-% Für Fortgeschrittene: das ganze repo mittels git rebase zu einem unverzwiegten umwandeln
-%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Schlussbemerkungen}
 
-\begin{frame}[label=gitintro50]
-\frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
+\begin{frame}[fragile,label=schluss10]
+\frametitle{Schlussbemerkungen (1)}
 \begin{itemize}
-\item diff \checkmark / difftool
-\item branches \checkmark
-\item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
-\item HEAD\checkmark , hash bzw. ref
-\item merge (Konflikte) \checkmark, fast-forward \checkmark
-\item .gitignore
 \item github $\neq$ git
-\item git nicht gut für Binärdateien
-\item bash extension
-\item aliase in .gitconfig
-\item erwähnen: push,  rebase,
-\item link auf branching model
-\item globale gitignore
+\begin{itemize}
+ \item git: Freies Tool zur Versionsverwaltung
+ \item github: Kommerzieller Webservice basierend auf git
+\end{itemize}
+\bigskip
+\pause
+\item git nicht gut für (große) Binärdateien
+\begin{itemize}
+ \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
+ \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
+\end{itemize}
+\bigskip
+\pause
+\item Nicht behandelte wichtige Konzepte/Kommandos
+\begin{itemize}
+ \item \verb|git fetch|, \verb|git pull|, \verb|git push|,  \verb|git rebase|, ...
+ \item Siehe Cheat-Sheet
+\end{itemize}
+\bigskip
+\pause
+\item Weitere Tipps:
+\begin{itemize}
+\item Informative Bash-Erweiterung (Bild), Link
+\item Aliase in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
+\item Globale gitignore-Datei: Link
+\item Bewährtes Branching-Modell anwenden: Link
+\end{itemize}
+
+
 
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=uj]{Schlussbemerkungen (2)}
+\begin{itemize}
+ \item Fragen?\\[10mm]
+ \item Unterstützung {\tiny (im Rahmen unserer Möglichkeiten)}:
+   \begin{itemize}
+   \item \url{https://fsfw-dresden.de/sprechstunde}
+   \item \url{https://fsfw-dresden.de/git-ws}
+   \item \url{kontakt@fsfw-dresden.de}
+   \end{itemize}
+\end{itemize}
 
-\begin{frame}[label=link10]{Tipps und Links}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=link10]{Quellen und Links}
 Weitere Ressourcen:
 \tiny
 \begin{itemize}
@@ -1279,28 +1270,31 @@ Weitere Ressourcen:
 \url{https://learn.adafruit.com/an-introduction-to-collaborating-with-version-control/initializing-a-repository-and-making-commits}
 \item ...
 \end{itemize}
-
-
 \end{frame}
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=uj]{Ausblick}
+
+
+\begin{frame}[label=schluss0]
+\frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
 \begin{itemize}
- \item Fragen?\\[10mm]
-   \pause
- \item Unterstützung später {\tiny (im Rahmen unserer Möglichkeiten)}:
-   \begin{itemize}
-   \item \url{https://fsfw-dresden.de/sprechstunde}
-   \item \url{kontakt@fsfw-dresden.de}
-   \end{itemize}
+\item diff \checkmark / difftool
+\item branches \checkmark
+\item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
+\item HEAD\checkmark , hash bzw. ref \checkmark
+\item merge (Konflikte) \checkmark, fast-forward \checkmark
+\item .gitignore \checkmark
+\item github $\neq$ git \checkmark
+\item git nicht gut für Binärdateien \checkmark
+\item bash extension
+\item aliase in .gitconfig \checkmark
+\item erwähnen: push,  rebase, \checkmark
+\item link auf branching model \checkmark
+\item globale gitignore \checkmark
+\item Werbung am Anfang kürzen und aktualisieren
+
 \end{itemize}
-
-
-
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{document}
