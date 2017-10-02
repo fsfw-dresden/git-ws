@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{branches30}
+% \includeonlyframes{uebung20}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -11,6 +11,10 @@
 \usepackage{wasysym}
 \MakeAutoQuote{„}{”}
 \usepackage[absolute,overlay]{textpos} % for \textblock
+
+\usepackage{fancyvrb}
+\usepackage{newverbs}
+\usepackage{xcolor}
 
 \usepackage{tikz}
 \usetikzlibrary{%
@@ -28,15 +32,32 @@
 \usepackage{lmodern}
 
 
-% \usepackage{lmodern}
-% \usepackage{anyfontsize}
-
 \hypersetup{
   colorlinks=true,
   linkcolor=, %
   urlcolor=[rgb]{.2, .2, .5} %
   % allcolors=[rgb]{0, 0, 0} % schwarz
 }
+
+
+% boilerplate stuff to get colred background of \verb|...|
+\definecolor{cverbbg}{gray}{0.93}
+
+\newenvironment{cverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
+  \endflushleft
+}
+
+\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
+\newverbcommand{\cverb}
+  {\setbox\verbbox\hbox\bgroup}
+  {\egroup\colorbox{cverbbg}{\box\verbbox}}
+
+% end of colored verb boilerplate
+
 
 \usetheme{Dresden}
 \setbeamertemplate{navigation symbols}{}
@@ -598,28 +619,28 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
- \item \verb|printf "Hallo\nWelt\n" > README.md|
- \item \texttt{git status}
- \item \texttt{git add README.md} \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
- \item \texttt{git status}
- \item \verb|git commit -m "New content of README"| %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
- \item \texttt{git status}
+ \item \cverb|printf "Hallo\nWelt\n" > README.md|
+ \item \cverb|git status|
+ \item \cverb|git add README.md| \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
+ \item \cverb|git status|
+ \item \cverb|git commit -m "New content of README"| %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
+ \item \cverb|git status|
 \end{itemize}
 \pause
  \item Änderungen durchführen, anzeigen und committen
 \begin{itemize}
- \item \verb|sed -i -- "s/Welt/Leute/g" README.md|
- \item \texttt{git diff}
+ \item \cverb|sed -i -- "s/Welt/Leute/g" README.md|
+ \item \cverb|git diff|
  \pause
  \pause
- \item \verb|git commit -am "change Hello-message"|
+ \item \cverb|git commit -am "change Hello-message"|
 \end{itemize}
  \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
- \item \texttt{git status}
- \item \texttt{git log}
- \item \texttt{gitk}
+ \item \cverb|git status|
+ \item \cverb|git log|
+ \item \cverb|gitk|
  \end{itemize}
 %  \pause
 %  \item Letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
@@ -643,7 +664,7 @@ Wozu zweiphasiger Commit-Prozess?
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=branches10]
+\begin{frame}[fragile,label=branches10]
 \frametitle{Theorie: Branches}
 \begin{columns}
 \column{0.349\textwidth}
@@ -824,15 +845,25 @@ Wozu zweiphasiger Commit-Prozess?
 \item Unkompliziertes paralleles Arbeiten an verschieden Versionen
 \item<2-> Der aktive Branch folgt \texttt{HEAD}
 \item<3-> beliebig viele Branches möglich
-\item<4-> Branch/Revision wechseln:\\ \texttt{git checkout \only<4,6>{bugfix}\only<5>{master}\only<7,8,9>{<ref>}}
-\item<8-> neuer Branch auf \texttt{HEAD} erstellen:\\ \texttt{git checkout -b experiment}
+\item<4-> Branch/Revision wechseln:\\
+% !! aus unklarem Grund funktioniert das hier nicht (\cverb oder \verb):
+% \only<4,6>{\cverb|git checkout bugfix|%}
+% \only<5>{\cverb|git checkout master|}
+% \only<7->{\cverb|git checkout <ref>|}
+
+% deswegen nehmen wir jetzt \texttt (ohne Farbe)
+\only<4,6>{\texttt{git checkout bugfix}}
+\only<5>{\texttt{git checkout master}}
+\only<7->{\texttt{git checkout <ref>}}
+\item<8-> neuer Branch auf \texttt{HEAD} erstellen:\\
+\verb|git checkout -b experiment|
 \end{itemize}
 \end{columns}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}[fragile,label=branches20]
 \frametitle{Theorie: Zusammenfassung Branches}
 \begin{columns}
   \column{0.349\textwidth}
@@ -1023,17 +1054,17 @@ Wozu zweiphasiger Commit-Prozess?
 \item Fall 1: Fast-Forward
 \pause
 \begin{itemize}
- \item \verb|git checkout master|
+ \item \cverb|git checkout master|
  \pause
- \item \verb|git merge bugfix|
+ \item \cverb|git merge bugfix|
 \end{itemize}
 \pause
 \bigskip
 \item Fall 2: Parallele Zweige
 \begin{itemize}
- \item \verb|git checkout master|
+ \item \cverb|git checkout master|
  \pause
- \item \verb|git merge bugfix|
+ \item \cverb|git merge bugfix|
  \item[$\Rightarrow$] Erzeugung eines "`Merge-Commits"'
  \pause
  \item Automatische Konfliktlösung ziemlich gut
@@ -1044,7 +1075,7 @@ Wozu zweiphasiger Commit-Prozess?
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{frame}[fragile,label=branches40]
   \frametitle{Theorie: Mergen – Konflikte auflösen}
   \begin{itemize}
   \item Konflikte beim Mergen: beide Versionen werden in der Datei markiert eingefügt\\
@@ -1058,8 +1089,8 @@ Wozu zweiphasiger Commit-Prozess?
   \item manuell editieren um den Konflikt aufzuheben (z.\,B. beide
     Zeilen behalten, die Änderungen in beiden Zeilen zusammenführen,
     eine Version behalten), die Marker entfernen
-  \item \texttt{git add <conflicting-file>}
-  \item \texttt{git commit}
+  \item \cverb|git add <conflicting-file>|
+  \item \cverb|git commit|
   \end{itemize}
 \end{frame}
 
@@ -1074,8 +1105,8 @@ Wozu zweiphasiger Commit-Prozess?
  {\scriptsize \url{https://pubgit.sotecware.net/fsfw-git-workshop/lyrik}}
  \item Basis für verschiedene Aufgaben (Anregungen zum spielen)
 \begin{enumerate}
- \item Repo klonen \texttt{git clone <url>}
- \item Überblick verschaffen: \verb|gitk --all|
+ \item Repo klonen \cverb|git clone <url>|
+ \item Überblick verschaffen: \cverb|gitk --all|
  \begin{enumerate}[a)]
   \item Wie viele Commits, Committer gibt es?
   \item Wie viele Branches?
@@ -1083,14 +1114,14 @@ Wozu zweiphasiger Commit-Prozess?
  \item Änderungen vornehmen
  \begin{enumerate}[a)]
  \item zum Branch \textit{weimar} wechseln
- \item in Datei \verb|gedichte/prometheus.md| 'YYY' durch 'ich' ersetzen,
+ \item in Datei \cverb|gedichte/prometheus.md| 'YYY' durch 'ich' ersetzen,
  \item committen
- \item analog im Branch \textit{london} \verb|sonnets/text1.md| 'XXX' durch 'thee' ersetzen
+ \item analog im Branch \textit{london} \cverb|sonnets/text1.md| 'XXX' durch 'thee' ersetzen
  \end{enumerate}
  \item commit-History einzelner Dateien anzeigen
  \begin{enumerate}[a)]
-  \item \verb|git blame AUTHORS.md|
-  \item \verb|git blame sonnets/text1.md|
+  \item \cverb|git blame AUTHORS.md|
+  \item \cverb|git blame sonnets/text1.md|
  \end{enumerate}
 \setcounter{taskcounter}{\value{enumi}}
 \end{enumerate}
@@ -1109,18 +1140,18 @@ Wozu zweiphasiger Commit-Prozess?
 
  \item Änderungen anzeigen
  \begin{enumerate}[a)]
-  \item ... seit dem vorletzten Commit: \verb|git diff HEAD~|
+  \item ... seit dem vorletzten Commit: \cverb|git diff HEAD~|
   \item[$\rightarrow$] beliebige Änderungen vornehmen
-  \item ... seit dem letzten Commit: \verb|git diff|
+  \item ... seit dem letzten Commit: \cverb|git diff|
   \item[]
-  \item Grafische diff-Anzeige: \verb|diff| durch \verb|difftool| ersetzen
-  \item[] vorher: \verb|git config --global diff.tool kdiff3|
+  \item Grafische diff-Anzeige: \cverb|diff| durch \cverb|difftool| ersetzen
+  \item[] vorher: \cverb|git config --global diff.tool kdiff3|
   \end{enumerate}
   \item Branch \textit{london} in \textit{master} mergen
   \begin{enumerate}[a)]
-   \item master auschecken: \verb|git checkout master|
-   \item merge durchführen: \verb|git merge london|
-   \item Ergebnis anschauen: \verb|gitk --all|
+   \item master auschecken: \cverb|git checkout master|
+   \item merge durchführen: \cverb|git merge london|
+   \item Ergebnis anschauen: \cverb|gitk --all|
   \end{enumerate}
 
  \setcounter{taskcounter}{\value{enumi}}
@@ -1142,22 +1173,22 @@ Wozu zweiphasiger Commit-Prozess?
 
   \item Irrelevante Dateien ignorieren
   \begin{enumerate}[a)]
-   \item sicherstellen, dass \verb|git status| "`working directory clean"' liefert
-   \item Skript ausführen: \verb|python3 scripts/find-shortest-poem.py|
-   \item \verb|git status| $\rightarrow$ Hilfsdateien bemerken (\verb|__pycache__|)
+   \item sicherstellen, dass \cverb|git status| "`working directory clean"' liefert
+   \item Skript ausführen: \cverb|python3 scripts/find-shortest-poem.py|
+   \item \cverb|git status| $\rightarrow$ Hilfsdateien bemerken (\cverb|__pycache__|)
    \item[] {\scriptsize Häufig treten lokale Dateien auf, deren Änderungen nicht von git verfolgt werden sollen
-   $\rightarrow$ Datei \verb|.gitignore| hilft}
-   \item ignore-Datei ergänzen: \verb|printf "__pycache__" >> .gitignore|
-   \item Staus-Änderung zur Kenntnis nehmen: \verb|git status|
-   \item Committen: \verb|git commit -am "ignore python-bytecode-dir"|
+   $\rightarrow$ Datei \cverb|.gitignore| hilft}
+   \item ignore-Datei ergänzen: \cverb|printf "__pycache__" >> .gitignore|
+   \item Staus-Änderung zur Kenntnis nehmen: \cverb|git status|
+   \item Committen: \cverb|git commit -am "ignore python-bytecode-dir"|
 %    \begin{itemize}
-%     \item \verb|git add .gitignore|
+%     \item \cverb|git add .gitignore|
 %     \item
 %    \end{itemize}
 \smallskip
-   \item Zur Kenntnis nehmen: \verb|git status| $\rightarrow$ "`working directory clean"'
+   \item Zur Kenntnis nehmen: \cverb|git status| $\rightarrow$ "`working directory clean"'
   \end{enumerate}
-  \item[] Hinweis: Inhalt der Datei \verb|.gitignore| (nachprüfen):
+  \item[] Hinweis: Inhalt der Datei \cverb|.gitignore| (nachprüfen):
   {\scriptsize
   \begin{verbatim}
    # This file specifies which files should not be tracked by git
@@ -1169,7 +1200,7 @@ Wozu zweiphasiger Commit-Prozess?
   \item Bedeutung der Zeilen
   \begin{enumerate}
    \item Erklärender Kommentar
-   \item Ignoriere alle Dateien in Unterverzeichnissen namens \verb|__pycache__|
+   \item Ignoriere alle Dateien in Unterverzeichnissen namens \cverb|__pycache__|
   \end{enumerate}
 
   \end{itemize}
@@ -1188,10 +1219,10 @@ Wozu zweiphasiger Commit-Prozess?
  \item Branch \textit{rom} in \textit{master} mergen
  \begin{enumerate}[a)]
  \item merge durchführen $\rightarrow$ Konflikt zur Kenntnis nehmen
- \item Überblick verschaffen: \verb|git status|  \verb|gitk --all|
- \item Manuell Konflikt in \verb|AUTHORS.md| beheben
+ \item Überblick verschaffen: \cverb|git status|  \cverb|gitk --all|
+ \item Manuell Konflikt in \cverb|AUTHORS.md| beheben
  \item Merge abschließen durch commiten der Änderungen:\\
- {\tiny \verb|git commit --add -m "merge branch rom after manual conflict resolution"|}
+ {\tiny \cverb|git commit --add -m "merge branch rom after manual conflict resolution"|}
  \end{enumerate}
 
  \setcounter{taskcounter}{\value{enumi}}
@@ -1201,17 +1232,18 @@ Weitere Ideen:
 \begin{itemize}
  \item Eigenen Branch anlegen mit bestimmten Eltern-Knoten
  \begin{itemize}
-  \item Commit-ID herausfinden: \verb|git log| (ersten 4 Zeichen reichen)
-  \item \verb|git checkout <id>|
-  \item \verb|git checkout -b mybranch|
+  \item Commit-ID herausfinden: \cverb|git log| (ersten 4 Zeichen reichen)
+  \item \cverb|git checkout <id>|
+  \item \cverb|git checkout -b mybranch|
  \end{itemize}
  \item Rebase aller Branches, so dass repo linear wird
  \begin{itemize}
   \item Hintergrundwissen:
   \begin{itemize}
-   \item  \verb|git help rebase|
-\item \url{https://onlywei.github.io/explain-git-with-d3/#rebase}
-  \item dort \verb|git rebase master| eintippen, Animation anschauen und Text lesen
+   \item  \cverb|git help rebase|
+   % soll auf eine Zeile gehen:
+\item \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
+  \item dort \cverb|git rebase master| eintippen, Animation anschauen und Text lesen
   \end{itemize}
  \end{itemize}
 
@@ -1236,13 +1268,13 @@ Weitere Ideen:
 \begin{itemize}
  \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
- \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
+ \item[$\rightarrow$] \cverb|.git|-Verzeichnis wird ggf. sehr groß
 \end{itemize}
 \bigskip
 \pause
 \item Nicht behandelte wichtige Konzepte/Kommandos
 \begin{itemize}
- \item \verb|git fetch|, \verb|git pull|, \verb|git push|,  \verb|git rebase|, ...
+ \item \cverb|git fetch|, \cverb|git pull|, \cverb|git push|,  \cverb|git rebase|, ...
  \item Siehe Cheat-Sheet
 \end{itemize}
 \bigskip
@@ -1252,7 +1284,7 @@ Weitere Ideen:
 \item \href{https://github.com/magicmonty/bash-git-prompt}{Status-Infos im Bash-Prompt}~
 \raisebox{-1mm}{\includegraphics[width=4cm]{img-src/git-prompt-snapshot1}}
 % git-prompt-snapshot1
-\item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
+\item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \cverb|.gitconfig| (z.B.: \cverb|git co| $\rightarrow$ \cverb| git checkout|)
 \item \href{https://stackoverflow.com/a/7335487/333403}{Globale gitignore-Datei} anlegen
 \item \href{http://nvie.com/posts/a-successful-git-branching-model/}{Bewährtes Branching-Modell} anwenden
 \end{itemize}
