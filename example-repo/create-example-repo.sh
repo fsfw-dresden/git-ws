@@ -12,6 +12,10 @@ mkdir $reponame
 cd $reponame
 git init
 
+cat >> .gitignore << END
+# This file specifies which files should not be tracked by git
+END
+
 cat >> ./README.md << END
 # $reponame
 Beispiel-Repositorium (kurz Repo) zur Demonstration von git.
