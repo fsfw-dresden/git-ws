@@ -1064,7 +1064,6 @@ Wozu zweiphasiger Commit-Prozess?
 \end{frame}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcounter{taskcounter}
 
@@ -1072,9 +1071,9 @@ Wozu zweiphasiger Commit-Prozess?
 \frametitle{Praxis}
 \begin{itemize}
  \item Bereitgestelltes nicht-trivials Repo URL:
- \item Basis für verschiedene Aufgaben (Anregungen zum Rumspielen)
+ \item Basis für verschiedene Aufgaben (Anregungen zum spielen)
 \begin{enumerate}
- \item Repo konen \texttt{git clone <url>}
+ \item Repo klonen \texttt{git clone <url>}
  \item Überblick verschaffen: \verb|gitk --all|
  \begin{enumerate}[a)]
   \item Wie viele Commits, Committer gibt es?
@@ -1190,7 +1189,7 @@ Wozu zweiphasiger Commit-Prozess?
  \item merge durchführen $\rightarrow$ Konflikt zur Kenntnis nehmen
  \item Überblick verschaffen: \verb|git status|  \verb|gitk --all|
  \item Manuell Konflikt in \verb|AUTHORS.md| beheben
- \item Merge abschließen durch dommiten der Änderungen:\\
+ \item Merge abschließen durch commiten der Änderungen:\\
  {\tiny \verb|git commit --add -m "merge branch rom after manual conflict resolution"|}
  \end{enumerate}
 
@@ -1210,11 +1209,10 @@ Weitere Ideen:
   \item Hintergrundwissen:
   \begin{itemize}
    \item  \verb|git help rebase|
-\item \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
+\item \url{https://onlywei.github.io/explain-git-with-d3/#rebase}
   \item dort \verb|git rebase master| eintippen, Animation anschauen und Text lesen
   \end{itemize}
  \end{itemize}
-
 
 \end{itemize}
 
@@ -1235,6 +1233,7 @@ Weitere Ideen:
 \pause
 \item git nicht gut für (große) Binärdateien
 \begin{itemize}
+ \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
  \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
 \end{itemize}
@@ -1312,7 +1311,7 @@ Weitere Ideen:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%
+
 % \begin{frame}[label=schluss0]
 % \frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
 % \begin{itemize}
@@ -1333,6 +1332,7 @@ Weitere Ideen:
 %
 % \end{itemize}
 % \end{frame}
+
 
 
 \end{document}
