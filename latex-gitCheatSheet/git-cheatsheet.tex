@@ -14,13 +14,16 @@
 % You should have received a copy of the GNU General Public License 
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
+
 \documentclass[a4paper,fontsize=7.5pt]{scrreprt}
+%\documentclass[a4paper,fontsize=7.5pt, ngerman]{scrreprt}
 
 % Packages
 \usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+%\usepackage[]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
-\usepackage[english]{babel}
 \usepackage{tabularx}
 \usepackage{enumerate}
 \usepackage{multicol}
@@ -94,31 +97,31 @@
 \begin{document}
 \vspace*{-1cm}
 \hfill\includegraphics[width=0.1\textwidth]{../img-src/fsfw-logo-with-text.pdf}
-\vspace*{-1cm}\begin{center}{\large\bfseries Git Cheat Sheet Volume 1}\end{center}
+\vspace*{-1cm}\begin{center}{\large\bfseries Git-Spickzettel Nr. 1}\end{center}
 \begin{multicols}{2}
 %% configure your settings for git
 \colouredbox{yellow}{
-	\begin{center}\section{Configuring git}\end{center}
+	\begin{center}\section{Git konfigurieren}\end{center}
 	\cmdline{git config [-{}-global] [option]}
-	\annotation{with \texttt{-{}-global} it is stored in \texttt{$\tilde{\ }$/.gitconfig}}
-	\subsection{Information about the user}
+	\annotation{mit \texttt{-{}-global}: wird es gespeichert in \texttt{$\tilde{\ }$/.gitconfig}}
+	\subsection{Information über den Anwender}
 		\sourcetext{user.name NAME}
 		\sourcetext{user.email EMAIL}
-	\subsection{Enabling coloured output}
+	\subsection{Farbige Ausgabe einschalten}
 		\sourcetext{color.ui auto}
-        \subsection{Improve interactive user-experience}
+        \subsection{Verbesserung der interaktiven Nutzererfahrung}
                 \sourcetext{interactive.singlekey true}
 }
 
 %% Create git Repositories
 \colouredbox{magenta}{
-	\begin{center}\section{Creating or cloning repositories}\end{center}
-	\subsection{From existing data}
+	\begin{center}\section{Erstellen und klonen von Repositories}\end{center}
+	\subsection{Von existierenden Daten}
 		\cmdline{cd \ my\_project\_dir}\\
 		\cmdline{git init}\\
 		\cmdline{git add .}
                 \cmdline{git commit -m 'initial commit'}
-	\subsection{From existing repo}
+	\subsection{Von existierendem Repo}
 		\cmdline{git clone path/to/existing/repo path/to/new/repo}\\
 		\cmdline{git clone you@host.de:dir/project.git}\\
 		\cmdline{git clone http://[USER@]host.de/project.git}
@@ -126,65 +129,65 @@
 
 %% Browse through files/repository
 \colouredbox{purple}{
-	\begin{center}\section{Getting information}\end{center}
-	\subsection{Files changed in working directory}
+	\begin{center}\section{Informationen erhalten}\end{center}
+	\subsection{Veränderte Dateien im Arbeitsverzeichnis}
 		\cmdline{git status}
-	\subsection{Changes of tracked files}
+	\subsection{Änderungen an überwachten Dateien}
 		\cmdline{git diff}
-	\subsection{Changes between ID1 and ID2}
+	\subsection{Änderungen zwischen ID1 und ID2}
 		\cmdline{git diff $<$ID1$>$ $<$ID2$>$}
-	\subsection{History of changes}
+	\subsection{Historie der Änderungen}
 		\cmdline{git log}
                 \cmdline{gitk}
 }
 
 %% Commit your changes
 \colouredbox{red}{
-	\begin{center}\section{Working with the Index and committing changes}\end{center}
-        \subsection{Add all changes in a file or directory to the index}
+	\begin{center}\section{Arbeiten mit dem Index und committen (dt.: einreichen) von Änderungen}\end{center}
+        \subsection{Füge alle Änderungen in einer Datei oder Verzeichnis zum Index hinzu}
                 \cmdline{git add path/to/add}
-        \subsection{Interactively select changes for addition/committing}
+        \subsection{Wähle interaktiv alle Änderungen zum Hinzufügen/ Committen aus}
                  \cmdline{git add -p [path/to/preselect/changes]}
                  \cmdline{git commit -p}
-        \subsection{Commit changes added to the index}
+        \subsection{Committe alle hinzugefügten Änderungen zum Index}
                 \cmdline{git commit}
-	\subsection{Add and commit all local changes}
+	\subsection{Füge alle lokalen Änderungen hinzu und committe sie}
 		\cmdline{git commit -a}
-	\subsection{Commit changes without editing the message}
+	\subsection{Committe Änderungen mit direkter Angabe einer Änderungsnachricht}
 		\cmdline{git commit -m "<message>"}
 }
 
 %% How to handle branches
 \colouredbox{orange}{
-	\begin{center}\section{Working with Branches}\end{center}
-	\subsection{List all branches}
+	\begin{center}\section{Arbeiten mit Branches (dt.: Äste)}\end{center}
+	\subsection{Alle Branches auflisten}
 		\cmdline{git branch}
                 \cmdline{git branch -a}
-                \annotation{list remote branches as well}
-	\subsection{Switch to a branch}
+                \annotation{Listet auch entfernte* Branches auf}
+	\subsection{Zu einem Branch wechseln}
 		\cmdline{git checkout <branch>}
-	\subsection{Merge Branch B1 into B2}
+	\subsection{Branch B1 in B2 mergen (dt. mischen)}
 		\cmdline{git checkout <B2>}
 		\cmdline{git merge <B1>}
-                \annotation{or}
+                \annotation{oder}
 		\cmdline{git merge -{}-no-ff <B1>}
-		\annotation{generates commit even if fast-forwarding is possible}
-	\subsection{Create Branch based on HEAD and checkout}
+		\annotation{Erstelle einen Commit auch wenn fast-forwarding möglich ist}
+	\subsection{Erstellen eines Branches basierend auf HEAD und checkout}
 		\cmdline{git checkout -b <branch>}
-	\subsection{Delete a branch}
+	\subsection{Löschen eines Branches}
 		\cmdline{git branch -d <branch>}
 		\cmdline{git branch -D <branch>}
-                \annotation{Delete a branch that is not merged to the default branch}
+                \annotation{Lösche einen, noch nicht mit dem Standard-Branch gemergeten, Branch}
 }
 
 
 %% how to update repository
 \colouredbox{pink}{
-	\begin{center}\section{Get changes from upstream}\end{center}
-	\subsection{Fetch changes from a remote}
+	\begin{center}\section{Änderungen von upstream (dt.: ???) erhalten}\end{center}
+	\subsection{Lade Änderungen von remote *(einem entfernten Repo) herunter}
 		\cmdline{git fetch [remote]}
-                \annotation{\texttt{remote} defaults to \texttt{origin}}
-        \subsection{Get changes}
+                \annotation{\texttt{remote} ist voreingestellt auf: \texttt{origin}}
+        \subsection{Änderungen bekommen}
                 \cmdline{git pull [remote] [refspec]}
                 \annotation{\texttt{remote} defaults to \texttt{origin}}
 }
@@ -192,64 +195,67 @@
 
 %% Resolve merge conflicts
 % \colouredbox{gray}{
-% 	\begin{center}\section{Resolve merge conflicts}\end{center}
-% 	\subsection{View merge conflicts}
+% 	\begin{center}\section{Lösen von Merge-Konflikten}\end{center}
+% 	\subsection{Merge-Konflikte anzeigen}
 % 		\cmdline{git diff}
-% 	\subsection{View merge conflicts against base file}
+% 	\subsection{Zeige Merge-Konflikte gegen Basisdateien}
 % 		\cmdline{git diff -{}-base <FILE>}
-% 	\subsection{View merge conflicts against other changes}
+% 	\subsection{Zeige Merge-Konflikte gegen Änderungen Anderer}
 % 		\cmdline{git diff -{}-theirs <FILE>}
-% 	\subsection{View merge conflicts against your changes}
+% 	\subsection{Zeige Merge-Konflikte gegen deine Änderungen}
 % 		\cmdline{git diff -{}-ours <FILE>}
-% 	\subsection{After resolving conflicts, merge with}
+% 	\subsection{Nach dem Auflösen von Konflikten committen nicht vergessen}
 % 		\cmdline{git add <CONFLICTING\_FILE>}\\
 %                 \cmdline{git commit}
 % }
 
 %% Publish your changes
 \colouredbox{blue}{
-	\begin{center}\section{Publishing changes}\end{center}
-	\subsection{Push changes to a remote}
+	\begin{center}\section{Änderungen veröffentlichen}\end{center}
+	\subsection{Änderungen nach remote pushen (also in ein entferntes Repo schieben)}
 		\cmdline{git push [origin] [branch]}
-	\subsection{Create tags}
+	\subsection{Einen tag (dt.: ???) erstellen}
 		\cmdline{git tag [-s] <tag name>}
-                \annotation{with \texttt{-s} the tag is signed with GPG}
-	\subsection{Prepare a patch}
+                \annotation{mit \texttt{-s} den tag mit GPG signieren}
+	\subsection{Einen Patch vorbereiten}
 		\cmdline{git format-patch origin}
 }
 
 %% Revert changes
 \colouredbox{green}{
-	\begin{center}\section{Reverting changes}\end{center}
-	\subsection{Return to last committed state}
+	\begin{center}\section{Änderungen rückgängig machen}\end{center}
+	\subsection{Zum zuletzt committeten Zustand zurückkehren}
 		\cmdline{git reset -{}-hard}
-	\subsection{Revert specific commit}
+	\subsection{Einen bestimmten Commit rückgängig machen}
 		\cmdline{git revert <ID>}
-                \annotation{this is safe for published commits}
-	\subsection{fix/change last commit}
+                \annotation{Dies ist sicher für bereits veröffentlichte Commits}
+	\subsection{Korrigieren/ Ändern des letzten Commits}
 		\cmdline{git commit -{}-amend}
-                \annotation{\emph{never} do this on a published commit\\
-                  unless you know what you are doing}
+                \annotation{Tue dies \emph{niemals} mit bereits veröffentlichten Commits\\
+                  außer du weißt genau, was du tust}
 }
 
 %% Git tips to handle things
 \colouredbox{gray}{
-	\begin{center}\section{Misc}\end{center}
-	\subsection{Documentation/help}
+	\begin{center}\section{Verschiedenes}\end{center}
+	\subsection{Dokumentation/ Hilfe}
 		\cmdline{git help [command]}
 		\cmdline{man git-[command]}
-	\subsection{Delete branch (locally and remote)}
+	\subsection{Einen Branch löschen (lokal und remote)}
 		\cmdline{git branch -d <branch>}
 		\cmdline{git push <origin> :<branch>}
-	\subsection{Beautify non-pushed history interactively}
+	\subsection{Die unveröffentlichte Historie interaktiv aufhübschen}
 		\cmdline{git rebase -i <ID>}
 }
 \end{multicols}
 \begin{center}
 \footnotesize
 \rule{0.9\linewidth}{0.25pt}
-\par fsfw git CheatSheet – Date: \today \ – Version \Version\
-based on \url{https://github.com/chiemseesurfer/latex-gitCheatSheet} Version 1.5
-by Max Oberberger (\texttt{github@oberbergers.de})
+\par fsfw git-Spickzettel – Datum: \today \ – Version \Version\
+basierend auf \url{https://github.com/chiemseesurfer/latex-gitCheatSheet} Version 1.5
+von Max Oberberger (\texttt{github@oberbergers.de})
 \end{center}
+
+%% @TODO: Eine Illustration zur Staging-Area & Co. sowie auch zu Best-Practice wie z.B.: Git-Flow/ Git-Dit fände ich gut für die Rückseite.
+
 \end{document}
