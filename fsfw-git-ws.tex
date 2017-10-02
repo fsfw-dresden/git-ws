@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{schluss10}
+% \includeonlyframes{branches30}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -905,8 +905,8 @@ Wozu zweiphasiger Commit-Prozess?
         {E}
       % HEAD reference
       \gitHEAD
-        {right=of E} % node placement
-        {E}
+        {below=of bugfix} % node placement
+        {bugfix}
 \end{tikzpicture}
 }%end of only
 \only<2>{
@@ -930,8 +930,8 @@ Wozu zweiphasiger Commit-Prozess?
         {E}
       % HEAD reference
       \gitHEAD
-        {right=of B} % node placement
-        {B}
+        {below=of master} % node placement
+        {master}
 \end{tikzpicture}
 }%end of only
 \only<3>{
@@ -951,13 +951,13 @@ Wozu zweiphasiger Commit-Prozess?
 
         \gitbranch
         {master}     % node name and text
-        {above=of bugfix} % node placement
+        {right=of E} % node placement
         {E}
 
         % HEAD reference
       \gitHEAD
-        {right=of E} % node placement
-        {E}
+        {below=of master} % node placement
+        {master}
 \end{tikzpicture}
 }%end of only
 
@@ -987,7 +987,7 @@ Wozu zweiphasiger Commit-Prozess?
 
       \gitHEAD
         {below=of master} % node placement
-        {D}
+        {master}
 \end{tikzpicture}
 }%end of only
 \only<5->{
@@ -1014,7 +1014,7 @@ Wozu zweiphasiger Commit-Prozess?
 
       \gitHEAD
         {below=of master} % node placement
-        {H}
+        {master}
 \end{tikzpicture}
 }%end of only
 
@@ -1135,6 +1135,8 @@ Wozu zweiphasiger Commit-Prozess?
 
 \begin{frame}[fragile,label=uebung30]
 \frametitle{Praxis (3)}
+\begin{columns}
+   \column{1.1\textwidth}
 \begin{enumerate}
  \setcounter{enumi}{\value{taskcounter}}
 
@@ -1145,25 +1147,37 @@ Wozu zweiphasiger Commit-Prozess?
    \item \verb|git status| $\rightarrow$ Hilfsdateien bemerken (\verb|__pycache__|)
    \item[] {\scriptsize Häufig treten lokale Dateien auf, deren Änderungen nicht von git verfolgt werden sollen
    $\rightarrow$ Datei \verb|.gitignore| hilft}
-   \item ignore-Datei anlegen: \verb|printf ".gitignore\nscripts/__pycache__/*" > .gitignore|
+   \item ignore-Datei ergänzen: \verb|printf "__pycache__" >> .gitignore|
+   \item Staus-Änderung zur Kenntnis nehmen: \verb|git status|
+   \item Committen: \verb|git commit -am "ignore python-bytecode-dir"|
+%    \begin{itemize}
+%     \item \verb|git add .gitignore|
+%     \item
+%    \end{itemize}
+\smallskip
    \item Zur Kenntnis nehmen: \verb|git status| $\rightarrow$ "`working directory clean"'
   \end{enumerate}
-  \bigskip
-  \item[] Hinweis: Inhalt der Datei \verb|.gitignore|:
+  \item[] Hinweis: Inhalt der Datei \verb|.gitignore| (nachprüfen):
+  {\scriptsize
   \begin{verbatim}
-   .gitignore
-   scripts/__pycache__/*
+   # This file specifies which files should not be tracked by git
+   __pycache__
   \end{verbatim}
+  }
+  \vspace{-3mm}
   \begin{itemize}
   \item Bedeutung der Zeilen
   \begin{enumerate}
-   \item Datei    \verb|.gitignore| selbst ignorieren
-   \item Alle Dateien im Unterverzeichnis \verb|scripts/__pycache__|
+   \item Erklärender Kommentar
+   \item Ignoriere alle Dateien in Unterverzeichnissen namens \verb|__pycache__|
   \end{enumerate}
 
   \end{itemize}
  \setcounter{taskcounter}{\value{enumi}}
 \end{enumerate}
+  \column{.01\textwidth}
+  ~
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1235,19 +1249,42 @@ Weitere Ideen:
 \pause
 \item Weitere Tipps:
 \begin{itemize}
-\item Informative Bash-Erweiterung (Bild), Link
-\item Aliase in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
-\item Globale gitignore-Datei: Link
-\item Bewährtes Branching-Modell anwenden: Link
+\item \href{https://github.com/magicmonty/bash-git-prompt}{Status-Infos im Bash-Prompt}~
+\raisebox{-1mm}{\includegraphics[width=4cm]{img-src/git-prompt-snapshot1}}
+% git-prompt-snapshot1
+\item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
+\item \href{https://stackoverflow.com/a/7335487/333403}{Globale gitignore-Datei} anlegen
+\item \href{http://nvie.com/posts/a-successful-git-branching-model/}{Bewährtes Branching-Modell} anwenden
 \end{itemize}
-
-
 
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=uj]{Schlussbemerkungen (2)}
+\begin{frame}[label=schluss20]{Schlussbemerkungen (2): Blick übern Tellerrand}
+
+\begin{itemize}
+ \item Kritische Einführungstage (02. - 13. Okt.)\\[-6mm]
+\url{https://www.kreta-dresden.org/}
+\hspace{12mm}\raisebox{-1mm}{\includegraphics[width=2cm]{img-src/kreta-logo}}
+   \begin{itemize}
+   \item Mo. 09.10.:\\ \href{https://www.kreta-dresden.org/program/sichere-kommunikation-warum-und-wie.html}
+   {Workshop: Sichere Kommunikation - Warum und Wie?}
+   \end{itemize}
+   \item[]
+   \item Umundu-Festival (20. - 28. Okt.) \quad \hspace{12mm}\raisebox{-4mm}{\includegraphics[width=2cm]{img-src/umundu-logo}}
+   \begin{itemize}
+    \item Festival für nachhaltige Entwicklung
+    \item Fokus Thema 2017: Armut und Reichtum
+    \item Filme, Vorträge, Workshops, ...
+    \item \url{https://umundu.de/}
+   \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=uj]{Schlussbemerkungen (3)}
 \begin{itemize}
  \item Fragen?\\[10mm]
  \item Unterstützung {\tiny (im Rahmen unserer Möglichkeiten)}:
@@ -1262,39 +1299,40 @@ Weitere Ideen:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[label=link10]{Quellen und Links}
-Weitere Ressourcen:
+\begin{frame}[label=link10]{Quellen und Links (Auswahl)}
 \tiny
 \begin{itemize}
- \item
-\url{https://learn.adafruit.com/an-introduction-to-collaborating-with-version-control/initializing-a-repository-and-making-commits}
+ \item \url{https://git-scm.com/documentation}
+ \item \url{https://git-scm.com/documentation/external-links}
+ \item \url{https://stackoverflow.com/questions/tagged/git}
+% \url{https://learn.adafruit.com/an-introduction-to-collaborating-with-version-control/initializing-a-repository-and-making-commits}
 \item ...
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\begin{frame}[label=schluss0]
-\frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
-\begin{itemize}
-\item diff \checkmark / difftool
-\item branches \checkmark
-\item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
-\item HEAD\checkmark , hash bzw. ref \checkmark
-\item merge (Konflikte) \checkmark, fast-forward \checkmark
-\item .gitignore \checkmark
-\item github $\neq$ git \checkmark
-\item git nicht gut für Binärdateien \checkmark
-\item bash extension
-\item aliase in .gitconfig \checkmark
-\item erwähnen: push,  rebase, \checkmark
-\item link auf branching model \checkmark
-\item globale gitignore \checkmark
-\item Werbung am Anfang kürzen und aktualisieren
-
-\end{itemize}
-\end{frame}
+%
+% \begin{frame}[label=schluss0]
+% \frametitle{Noch fehlende Inhalte (kurz oder mit eigener Folie)}
+% \begin{itemize}
+% \item diff \checkmark / difftool
+% \item branches \checkmark
+% \item Visualisierung eines repos (Graph mit Pfeilen) \checkmark
+% \item HEAD\checkmark , hash bzw. ref \checkmark
+% \item merge (Konflikte) \checkmark, fast-forward \checkmark
+% \item .gitignore \checkmark
+% \item github $\neq$ git \checkmark
+% \item git nicht gut für Binärdateien \checkmark
+% \item bash extension
+% \item aliase in .gitconfig \checkmark
+% \item erwähnen: push,  rebase, \checkmark
+% \item link auf branching model \checkmark
+% \item globale gitignore \checkmark
+% \item Werbung am Anfang kürzen und aktualisieren
+%
+% \end{itemize}
+% \end{frame}
 
 
 \end{document}
