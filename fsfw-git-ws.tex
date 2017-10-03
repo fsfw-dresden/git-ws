@@ -1104,7 +1104,7 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
  \item Bereitgestelltes nicht-trivials Repo:\\
  {\scriptsize \url{https://pubgit.sotecware.net/fsfw-git-workshop/lyrik}}
- \item Basis für verschiedene Aufgaben (Anregungen zum spielen)
+ \item Basis für verschiedene Aufgaben (Anregungen zum Spielen)
 \begin{enumerate}
  \item Repo klonen \cverb|git clone <url>|
  \item Überblick verschaffen: \cverb|gitk --all|
@@ -1200,8 +1200,8 @@ Wozu zweiphasiger Commit-Prozess?
   \begin{itemize}
   \item Bedeutung der Zeilen
   \begin{enumerate}
-   \item Erklärender Kommentar
-   \item Ignoriere alle Dateien in Unterverzeichnissen namens \cverb|__pycache__|
+   \item Erklärender Kommentar gefolgt von zu ignorierenden Dateien/ Verz.
+%%   \item Ignoriere alle Dateien in Unterverzeichnissen namens \cverb|__pycache__|	%% @FIXME: Diese Zeile passt leider nicht mehr auf die Folie
   \end{enumerate}
 
   \end{itemize}
@@ -1261,8 +1261,9 @@ Weitere Ideen:
 \begin{itemize}
 \item github $\neq$ git
 \begin{itemize}
- \item git: Freies Tool zur Versionsverwaltung
- \item github: Kommerzieller Webservice basierend auf git
+ \item \href{https://git-scm.com/}{git}: Freies Tool zur Versionsverwaltung
+ \item \href{http://github.com/}{github}: Kommerzieller Webservice basierend auf git ("Fratzenbuch der Nerds")
+ \item \href{https://gitea.io/}{Gitea}, GitLab, Fusionforge: freie Git-Webfrontends zum selbst Hosten
 \end{itemize}
 \bigskip
 \pause
@@ -1271,9 +1272,20 @@ Weitere Ideen:
  \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
  \item[$\rightarrow$] \cverb|.git|-Verzeichnis wird ggf. sehr groß
+ \item mögliche Workarounds
+ \begin{itemize}
+  \item \href{http://git-annex.branchable.com/}{git annex} verwenden
+  \item Zergliedern der Binärdateien (z.B.: Bilder aus Dokumenten auslagern und nur verlinkt einbinden; Zip-Archive meiden)
+ \end{itemize}
 \end{itemize}
-\bigskip
-\pause
+%%\bigskip
+%%\pause
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=schluss10]
+\frametitle{Schlussbemerkungen (2)}
+\begin{itemize}
 \item Nicht behandelte wichtige Konzepte/Kommandos
 \begin{itemize}
  \item \cverb|git fetch|, \cverb|git pull|, \cverb|git push|,  \cverb|git rebase|, ...
@@ -1295,7 +1307,7 @@ Weitere Ideen:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=schluss20]{Schlussbemerkungen (2): Blick übern Tellerrand}
+\begin{frame}[label=schluss20]{Schlussbemerkungen (3): Blick übern Tellerrand}
 
 \begin{itemize}
  \item Kritische Einführungstage (02. - 13. Okt.)\\[-6mm]
@@ -1318,7 +1330,7 @@ Weitere Ideen:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=uj]{Schlussbemerkungen (3)}
+\begin{frame}[label=uj]{Schlussbemerkungen (4)}
 \begin{itemize}
  \item Fragen?\\[10mm]
  \item Unterstützung {\tiny (im Rahmen unserer Möglichkeiten)}:
