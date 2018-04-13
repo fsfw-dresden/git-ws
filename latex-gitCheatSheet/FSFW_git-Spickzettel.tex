@@ -16,12 +16,11 @@
 %
 
 \documentclass[a4paper,fontsize=7.5pt]{scrreprt}
-%\documentclass[a4paper,fontsize=7.5pt, ngerman]{scrreprt}
 
 % Packages
 \usepackage[utf8]{inputenc}
-%\usepackage[ngerman]{babel}
-%\usepackage[]{babel}
+\usepackage[ngerman]{babel}
+\usepackage[]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{tabularx}
@@ -69,7 +68,7 @@
 % set own shortcuts
 \newcommand{\sourcetext}[1] {
 	\begin{tabularx}{\hsize}{X}
-			{\texttt{} #1}
+			{\texttt{#1}}
 	\end{tabularx}
 }
 
@@ -103,19 +102,19 @@
 \colouredbox{yellow}{
 	\begin{center}\section{Git konfigurieren}\end{center}
 	\cmdline{git config [-{}-global] [option]}
-	\annotation{mit \texttt{-{}-global}: wird es gespeichert in \texttt{$\tilde{\ }$/.gitconfig}}
+	\annotation{mit \texttt{-{}-global}: wird es in \texttt{$\tilde{\ }$/.gitconfig} gespeichert}
 	\subsection{Information über den Anwender}
 		\sourcetext{user.name NAME}
 		\sourcetext{user.email EMAIL}
 	\subsection{Farbige Ausgabe einschalten}
 		\sourcetext{color.ui auto}
-        \subsection{Verbesserung der interaktiven Nutzererfahrung}
+        \subsection{Verbesserung der interaktiven Bedienbarkeit}
                 \sourcetext{interactive.singlekey true}
 }
 
 %% Create git Repositories
 \colouredbox{magenta}{
-	\begin{center}\section{Erstellen und klonen von Repositorien}\end{center}
+	\begin{center}\section{Erstellen und Klonen von Repositorien}\end{center}
 	\subsection{Von existierenden Daten}
 		\cmdline{cd \ my\_project\_dir}\\
 		\cmdline{git init}\\
@@ -136,17 +135,17 @@
 		\cmdline{git diff}
 	\subsection{Änderungen zwischen ID1 und ID2}
 		\cmdline{git diff $<$ID1$>$ $<$ID2$>$}
-	\subsection{Historie der Änderungen}
+	\subsection{Änderungsverlauf}
 		\cmdline{git log}
                 \cmdline{gitk}
 }
 
 %% Commit your changes
 \colouredbox{red}{
-	\begin{center}\section{Arbeiten mit dem Index und committen (dt.: einreichen) von Änderungen}\end{center}
+	\begin{center}\section{Arbeiten mit dem Index und committen \linebreak (dt.: beitragen) von Änderungen}\end{center}
         \subsection{Füge alle Änderungen in einer Datei oder Verzeichnis zum Index hinzu}
                 \cmdline{git add path/to/add}
-        \subsection{Wähle interaktiv alle Änderungen zum Hinzufügen/ Committen aus}
+        \subsection{Wähle interaktiv alle Änderungen zum Hinzufügen/Committen aus}
                  \cmdline{git add -p [path/to/preselect/changes]}
                  \cmdline{git commit -p}
         \subsection{Committe alle hinzugefügten Änderungen zum Index}
@@ -159,20 +158,20 @@
 
 %% How to handle branches
 \colouredbox{orange}{
-	\begin{center}\section{Arbeiten mit Branches (dt.: Äste)}\end{center}
+	\begin{center}\section{Arbeiten mit Branches (dt.: Zweige)}\end{center}
 	\subsection{Alle Branches auflisten}
 		\cmdline{git branch}
                 \cmdline{git branch -a}
                 \annotation{Listet auch entfernte* Branches auf}
 	\subsection{Zu einem Branch wechseln}
 		\cmdline{git checkout <branch>}
-	\subsection{Branch B1 in B2 mergen (dt. mischen)}
+	\subsection{Branch B1 in B2 mergen (dt. Zusammenführen)}
 		\cmdline{git checkout <B2>}
 		\cmdline{git merge <B1>}
                 \annotation{oder}
 		\cmdline{git merge -{}-no-ff <B1>}
 		\annotation{Erstelle einen Commit auch wenn fast-forwarding möglich ist}
-	\subsection{Erstellen eines Branches basierend auf HEAD und checkout}
+	\subsection{Erstellen eines Branches basierend auf HEAD und wechselt zu diesem}
 		\cmdline{git checkout -b <branch>}
 	\subsection{Löschen eines Branches}
 		\cmdline{git branch -d <branch>}
