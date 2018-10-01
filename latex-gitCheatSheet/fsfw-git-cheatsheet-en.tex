@@ -27,12 +27,24 @@
 \usepackage{enumerate}
 \usepackage{multicol}
 \usepackage{vmargin}
-\usepackage{hyperref}
 \usepackage{graphicx}
-
+\usepackage{lmodern}
 \usepackage[table]{xcolor}
 
-\setmarginsrb{1.1cm}{9mm}% left, top
+\usepackage[pdftex]{hyperref}
+
+\definecolor{myblue}{HTML}{4040dd}
+\hypersetup{
+    pdftitle = {FSFW git CheatSheet},
+    colorlinks = true,
+    linkcolor={myblue},
+    citecolor={myblue},
+    urlcolor={myblue},
+}
+
+
+
+\setmarginsrb{1.1cm}{8mm}% left, top
 		      {1.0cm}{1.0cm}% right, down
                 	      {7mm}{0.5cm}% head: height, distance
 	               {7mm}{0.5cm}% foot: height, distance
@@ -40,11 +52,13 @@
 % Set column space
 \setlength{\columnsep}{0.25em}
 
+% original colors (quit high saturation)
 % Define colours – todo: use fsfw-colour scheme
-% \definecolorset{hsb}{}{}{red,0,.1,0.95;orange,.1,.1,0.95;green,.25,.1,0.95;yellow,.15,.1,0.95}
-% \definecolorset{hsb}{}{}{blue,.55,.1,0.95;purple,.7,.1,0.95;pink,.8,.1,0.95;blue2,.58,.1,0.95}
-% \definecolorset{hsb}{}{}{magenta,.9,.1,0.95;green2,.29,.1,0.95;gray2,.6,.01,0.85}
+% \definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
+% \definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
+% \definecolorset{hsb}{}{}{magenta,.9,.4,0.95;green2,.29,.4,0.95;gray2,.6,.04,0.85}
 
+% new colors (quit low saturation, save printer-toner, (looks much better on paper than on screen))
 \definecolorset{hsb}{}{}{red,0,.025,0.95;orange,.1,.025,0.95;green,.25,.025,0.95;yellow,.15,.025,0.95}
 \definecolorset{hsb}{}{}{blue,.55,.025,0.95;purple,.7,.025,0.95;pink,.8,.025,0.95;blue2,.58,.025,0.95}
 \definecolorset{hsb}{}{}{magenta,.9,.025,0.95;green2,.29,.025,0.95;gray2,.6,.01,0.85}
@@ -100,7 +114,8 @@
 %%%%%%%%%% DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\parbox{7cm}{\vspace*{-3cm}Hochschulgruppe für Freie Software und Freies Wissen \\ \url{https://fsfw-dresden.de}}\hfill\includegraphics[width=0.1\textwidth]{../img-src/fsfw-logo-with-text.pdf}
+\parbox{7cm}{\vspace*{-3cm}Hochschulgruppe für Freie Software und Freies Wissen \\
+\textcolor{myblue}{\url{https://fsfw-dresden.de}} \hspace{0.85em} kontakt@fsfw-dresden.de} \hfill\includegraphics[width=0.1\textwidth]{../img-src/fsfw-logo-with-text.pdf}
 \vspace*{-1cm}\begin{center}{\large\bfseries FSFW Git Workshop Cheat Sheet}\end{center}
 \begin{multicols}{2}
 %% configure your settings for git
@@ -265,7 +280,7 @@
 \begin{center}
 \footnotesize
 \rule{0.9\linewidth}{0.25pt}
-\par FSFW git CheatSheet – Version \Version\par
+\par FSFW git CheatSheet – Version \Version ~~\textcolor{myblue}{\url{https://fsfw-dresden.de/git-ws}}\\
 \noindent adapted from \url{https://github.com/chiemseesurfer/latex-gitCheatSheet} Version 1.5 by Max Oberberger (\texttt{github@oberbergers.de})\par
 \noindent licensed under GPLv3+
 \end{center}
