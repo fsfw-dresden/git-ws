@@ -6,16 +6,17 @@
 % it under the terms of the GNU General Public License as published by
 % the Free Software Foundation, either version 3 of the License, or
 % (at your option) any later version.
-% 
+%
 % This program is distributed in the hope that it will be useful,
 % but WITHOUT ANY WARRANTY; without even the implied warranty of
-% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 % GNU General Public License for more details.
-% 
-% You should have received a copy of the GNU General Public License 
+%
+% You should have received a copy of the GNU General Public License
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 \documentclass[a4paper,fontsize=7.5pt]{scrreprt}
+\synctex=1
 
 % Packages
 \usepackage[utf8]{inputenc}
@@ -31,7 +32,7 @@
 
 \usepackage[table]{xcolor}
 
-\setmarginsrb{1.1cm}{1.0cm}% left, top
+\setmarginsrb{1.1cm}{9mm}% left, top
 		      {1.0cm}{1.0cm}% right, down
                 	      {7mm}{0.5cm}% head: height, distance
 	               {7mm}{0.5cm}% foot: height, distance
@@ -40,9 +41,15 @@
 \setlength{\columnsep}{0.25em}
 
 % Define colours – todo: use fsfw-colour scheme
-\definecolorset{hsb}{}{}{red,0,.4,0.95;orange,.1,.4,0.95;green,.25,.4,0.95;yellow,.15,.4,0.95}
-\definecolorset{hsb}{}{}{blue,.55,.4,0.95;purple,.7,.4,0.95;pink,.8,.4,0.95;blue2,.58,.4,0.95}
-\definecolorset{hsb}{}{}{magenta,.9,.4,0.95;green2,.29,.4,0.95}
+% \definecolorset{hsb}{}{}{red,0,.1,0.95;orange,.1,.1,0.95;green,.25,.1,0.95;yellow,.15,.1,0.95}
+% \definecolorset{hsb}{}{}{blue,.55,.1,0.95;purple,.7,.1,0.95;pink,.8,.1,0.95;blue2,.58,.1,0.95}
+% \definecolorset{hsb}{}{}{magenta,.9,.1,0.95;green2,.29,.1,0.95;gray2,.6,.01,0.85}
+
+\definecolorset{hsb}{}{}{red,0,.025,0.95;orange,.1,.025,0.95;green,.25,.025,0.95;yellow,.15,.025,0.95}
+\definecolorset{hsb}{}{}{blue,.55,.025,0.95;purple,.7,.025,0.95;pink,.8,.025,0.95;blue2,.58,.025,0.95}
+\definecolorset{hsb}{}{}{magenta,.9,.025,0.95;green2,.29,.025,0.95;gray2,.6,.01,0.85}
+
+% \definecolor{gray2}{gray}{0.7}
 
 % Redefine sections
 \makeatletter
@@ -56,7 +63,7 @@
 \setcounter{secnumdepth}{0}
 
 % set Version
-\newcommand{\Version}[0]{1.0}
+\newcommand{\Version}[0]{1.1}
 
 % No indentation
 \setlength{\parindent}{0em}
@@ -97,17 +104,21 @@
 \vspace*{-1cm}\begin{center}{\large\bfseries FSFW Git Workshop Cheat Sheet}\end{center}
 \begin{multicols}{2}
 %% configure your settings for git
+\colouredbox{gray2}{
+\textbf{Note}: Parts of commands in [square brackets] are optional.
+}
+
 \colouredbox{yellow}{
 	\begin{center}\section{Configuring git}\end{center}
 	\cmdline{git config [-{}-global] [option]}
 	\annotation{with \texttt{-{}-global} it is stored in \texttt{$\tilde{\ }$/.gitconfig}}
 	\subsection{Information about the user}
-		\sourcetext{user.name NAME}
-		\sourcetext{user.email EMAIL}
+		\cmdline{git config user.name NAME}
+		\cmdline{git config user.email EMAIL@HOST.TLD}
 	\subsection{Enabling coloured output}
-		\sourcetext{color.ui auto}
+		\cmdline{git config color.ui auto}
         \subsection{Improve interactive user-experience}
-                \sourcetext{interactive.singlekey true}
+                \cmdline{git config interactive.singlekey true}
 }
 
 %% Create git Repositories
@@ -135,17 +146,22 @@
 		\cmdline{git diff $<$ID1$>$ $<$ID2$>$}
 	\subsection{History of changes}
 		\cmdline{git log}
-                \cmdline{gitk}
+         \cmdline{gitk}
+         \cmdline{gitk -{}-all}
 }
 
 %% Commit your changes
 \colouredbox{red}{
 	\begin{center}\section{Working with the Index and committing changes}\end{center}
         \subsection{Add all changes in a file or directory to the index}
-                \cmdline{git add path/to/add}
-        \subsection{Interactively select changes for addition/committing}
-                 \cmdline{git add -p [path/to/preselect/changes]}
-                 \cmdline{git commit -p}
+                \cmdline{git add path/to/file\_or\_dir}
+                \cmdline{git add .}
+        \subsection{Interactively select changes for addition}
+                 \cmdline{git add -p [path/to/preselect\_some\_files]}
+
+                 % removed because not important enough
+                 % \cmdline{git commit -p}
+
         \subsection{Commit changes added to the index}
                 \cmdline{git commit}
 	\subsection{Add and commit all local changes}
@@ -210,7 +226,8 @@
 \colouredbox{blue}{
 	\begin{center}\section{Publishing changes}\end{center}
 	\subsection{Push changes to a remote}
-		\cmdline{git push [origin] [branch]}
+        \cmdline{git push [origin] [branch]}
+		\cmdline{git push}
 	\subsection{Create tags}
 		\cmdline{git tag [-s] <tag name>}
                 \annotation{with \texttt{-s} the tag is signed with GPG}
@@ -233,11 +250,11 @@
 }
 
 %% Git tips to handle things
-\colouredbox{gray}{
+\colouredbox{gray2}{
 	\begin{center}\section{Misc}\end{center}
 	\subsection{Documentation/help}
 		\cmdline{git help [command]}
-		\cmdline{man git-[command]}
+		\cmdline{man git-<command>}
 	\subsection{Delete branch (locally and remote)}
 		\cmdline{git branch -d <branch>}
 		\cmdline{git push <origin> :<branch>}
