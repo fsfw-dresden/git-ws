@@ -7,7 +7,7 @@ Git Einführung (mit Praxis)
 Schlussbemerkungen
 
 Versionsverwaltung mit git: Warum und wie.
-Bunter Nachmittag des iFSR, 02.10.2017
+Erstsemester-Einführung Informatik, 01.10.2018
 
 1 / 31
 
@@ -34,7 +34,7 @@ Schlussbemerkungen
 Wer sind wir?
 I
 
-Hochschulgruppe an der TU (gegründet 2014, ca. 10 P.)
+Hochschulgruppe an der TU (gegründet 2014, ca. 8 P.)
 
 I
 
@@ -58,7 +58,7 @@ Schlussbemerkungen
 Wer sind wir?
 I
 
-Hochschulgruppe an der TU (gegründet 2014, ca. 10 P.)
+Hochschulgruppe an der TU (gegründet 2014, ca. 8 P.)
 
 I
 
@@ -82,7 +82,7 @@ Linux-Install-Party, Linux-Presentation-Day
 Verschlüsselungsgewinnspiel
 Monatliche Sprechstunde zu LATEX u.a.
 Formulierung eines Programmpapiers
-„Uni-Stick“: 80 × 8 GB mit freier Software
+„Uni-Stick“: 130 × 8 GB mit freier Software
 
 3 / 31
 
@@ -135,12 +135,12 @@ Git Einführung (mit Praxis)
 
 Schlussbemerkungen
 
-Projekt Uni-Stick
+Projekt Uni-Stick (3. Auflage)
 I
 
 4000 Flyer in Ersti-Tüten: Gutscheine für 8 GB Stick mit
-freier Software fürs Studium, 550 A
-C vom TU-StuRa für 80 Stk.
+freier Software fürs Studium, ≈ 800 A
+C vom StuRa für 130 Stk.
 
 I
 
@@ -156,37 +156,12 @@ Git Einführung (mit Praxis)
 
 Schlussbemerkungen
 
-Projekt Uni-Stick
+Projekt Uni-Stick (3. Auflage)
 I
 
 4000 Flyer in Ersti-Tüten: Gutscheine für 8 GB Stick mit
-freier Software fürs Studium, 550 A
-C vom TU-StuRa für 80 Stk.
-
-I
-
-Live-Linux / freie Windows-Programme
-
-I
-
-Hat viel Arbeit gemacht
-
-5 / 31
-
-Warum Versionsverwaltung?
-
-Warum Git?
-
-Git Einführung (mit Praxis)
-
-Schlussbemerkungen
-
-Projekt Uni-Stick
-I
-
-4000 Flyer in Ersti-Tüten: Gutscheine für 8 GB Stick mit
-freier Software fürs Studium, 550 A
-C vom TU-StuRa für 80 Stk.
+freier Software fürs Studium, ≈ 800 A
+C vom StuRa für 130 Stk.
 
 I
 
@@ -196,10 +171,6 @@ I
 
 Hat viel Arbeit gemacht
 
-I
-
-Ist gut angekommen (ca. 250 TN)
-
 5 / 31
 
 Warum Versionsverwaltung?
@@ -210,12 +181,12 @@ Git Einführung (mit Praxis)
 
 Schlussbemerkungen
 
-Projekt Uni-Stick
+Projekt Uni-Stick (3. Auflage)
 I
 
 4000 Flyer in Ersti-Tüten: Gutscheine für 8 GB Stick mit
-freier Software fürs Studium, 550 A
-C vom TU-StuRa für 80 Stk.
+freier Software fürs Studium, ≈ 800 A
+C vom StuRa für 130 Stk.
 
 I
 
@@ -229,18 +200,6 @@ I
 
 Ist gut angekommen (ca. 250 TN)
 
-I
-
-Accessibility:
-I
-I
-I
-I
-
-brltty
-gnome-orca (Screenreader)
-...
-WIP!
 5 / 31
 
 Warum Versionsverwaltung?
@@ -265,13 +224,13 @@ I
 
 Mehr Blog-Beiträge
 Kurse (LATEX/ Python / Git / Inkscape / . . . )
-Ansible-Infrastruktur-Stipendium
+Infrastruktur-Stipendium
 OpenSource-Wettbewerb/Preis
 ...
 
 I
 
-Aufmerksamkeit erzeugen / Lobby-Arbeit
+Aufmerksamkeit erzeugen / Lobby-Arbeit („Landesverträge“)
 
 I
 
@@ -291,8 +250,7 @@ Weitere Informationen
 
 https://fsfw-dresden.de/
 
-
-uni-stick
+ uni-stick
 
 
 
@@ -300,20 +258,24 @@ uni-stick
 
 blog
 
-
+
+
+
+ newsletter
 
-newsletter
-
-
-
-
 mitmachen
 
 
 
-
-
+
+
 fork
+
+
+
+
+
+git-ws
 
 7 / 31
 
@@ -489,7 +451,8 @@ Schlussbemerkungen
 Warum Git? (3)
 
 Gefühlter Grad der Verbreitung: Git vs SVN
-2017: Git = defacto Standard
+Seit 2016: Git =
+ˆ defacto Standard
 13 / 31
 
 Warum Versionsverwaltung?
@@ -501,18 +464,22 @@ Git Einführung (mit Praxis)
 Schlussbemerkungen
 
 Einführung in git – Was ist ein Repo?
-A
-HEAD
 
-B
+HEAD
 
 master
 
+A
+
+Start
+
+B
+
+Nachfolger
+
 C
 
-index
-
-working tree
+Nach-Nachfolger
 
 I
 
@@ -527,6 +494,49 @@ Commit-ID abgeleitet aus dem Inhalt und
 dem Graphen (kryptographische
 Hash-Funktion)
 
+14 / 31
+
+Warum Versionsverwaltung?
+
+Warum Git?
+
+Git Einführung (mit Praxis)
+
+Schlussbemerkungen
+
+Einführung in git – Was ist ein Repo?
+
+HEAD
+
+master
+
+A
+
+Start
+
+B
+
+Nachfolger
+
+C
+
+I
+
+gerichteter, azyklischer Graph von Versionen
+(revisions) einer Ordnerstruktur und deren
+Inhalt mit Metadaten (Commit-ID, Autor,
+Beschreibungstext)
+
+I
+
+Commit-ID abgeleitet aus dem Inhalt und
+dem Graphen (kryptographische
+Hash-Funktion)
+
+Nach-Nachfolger
+
+Beispiel: b52c95e791e1dac76b7f70292e366de7caa76178
+
 I
 
 HEAD: Knoten im Graphen; momentaner
@@ -535,9 +545,118 @@ Bezugspunkt für Operationen
 I
 
 refs: referenzieren Knoten im Graphen
-(Beispiele: HEAD, HEADˆ, master, per
-abgekürzter Commit-ID f23faaa)
+(Beispiele: HEAD, HEADˆ3, master,
+my_branch, b52c95e (abgekürzte Commit-ID))
+14 / 31
 
+Warum Versionsverwaltung?
+
+Warum Git?
+
+Git Einführung (mit Praxis)
+
+Schlussbemerkungen
+
+Einführung in git – Was ist ein Repo?
+
+HEAD
+
+master
+
+A
+
+Start
+
+B
+
+Nachfolger
+
+C
+
+I
+
+gerichteter, azyklischer Graph von Versionen
+(revisions) einer Ordnerstruktur und deren
+Inhalt mit Metadaten (Commit-ID, Autor,
+Beschreibungstext)
+
+I
+
+Commit-ID abgeleitet aus dem Inhalt und
+dem Graphen (kryptographische
+Hash-Funktion)
+
+Nach-Nachfolger
+
+Beispiel: b52c95e791e1dac76b7f70292e366de7caa76178
+
+I
+
+HEAD: Knoten im Graphen; momentaner
+Bezugspunkt für Operationen
+
+I
+
+refs: referenzieren Knoten im Graphen
+(Beispiele: HEAD, HEADˆ3, master,
+my_branch, b52c95e (abgekürzte Commit-ID))
+14 / 31
+
+Warum Versionsverwaltung?
+
+Warum Git?
+
+Git Einführung (mit Praxis)
+
+Schlussbemerkungen
+
+Einführung in git – Was ist ein Repo?
+
+HEAD
+
+master
+
+A
+
+Start
+
+B
+
+Nachfolger
+
+C
+
+I
+
+gerichteter, azyklischer Graph von Versionen
+(revisions) einer Ordnerstruktur und deren
+Inhalt mit Metadaten (Commit-ID, Autor,
+Beschreibungstext)
+
+I
+
+Commit-ID abgeleitet aus dem Inhalt und
+dem Graphen (kryptographische
+Hash-Funktion)
+
+Nach-Nachfolger
+
+Beispiel: b52c95e791e1dac76b7f70292e366de7caa76178
+
+index
+
+working tree
+
+I
+
+HEAD: Knoten im Graphen; momentaner
+Bezugspunkt für Operationen
+
+I
+
+refs: referenzieren Knoten im Graphen
+(Beispiele: HEAD, HEADˆ3, master,
+my_branch, b52c95e (abgekürzte Commit-ID))
 14 / 31
 
 Warum Versionsverwaltung?
@@ -792,9 +911,10 @@ git config --global user.name "Your Name"
 
 git clone <url>
 
-Hintergrund: Wo speichert git die relevanten Informationen?
+Hintergrund: Wo speichert git
+die relevanten Informationen?
 
-→ Verstecktes Verzeichnis:
+→ Verstecktes Verzeichnis .git
 16 / 31
 
 Warum Versionsverwaltung?
@@ -1081,7 +1201,11 @@ Theorie: Branches
 A
 HEAD
 
+B
+
 master
+
+C
 
 I
 
@@ -1091,9 +1215,6 @@ verschieden Versionen
 I
 
 Der aktive Branch folgt HEAD
-
-B
-C
 
 20 / 31
 
@@ -1110,7 +1231,14 @@ Theorie: Branches
 A
 HEAD
 
+B
+
 master
+
+C
+bugfix
+
+D
 
 I
 
@@ -1125,11 +1253,6 @@ I
 
 beliebig viele Branches möglich
 
-B
-C
-bugfix
-
-D
 E
 
 20 / 31
@@ -1732,7 +1855,7 @@ Praxis
 I
 
 Bereitgestelltes nicht-trivials Repo:
-https://pubgit.sotecware.net/fsfw-git-workshop/lyrik
+https://github.com/fsfw-dresden/git-ws-lyrik.git
 
 I
 
@@ -1769,7 +1892,10 @@ a) ... seit dem vorletzten Commit: git diff HEAD~
 → beliebige Änderungen vornehmen
 b) ... seit dem letzten Commit: git diff
 c) Grafische diff-Anzeige: diff durch difftool ersetzen
-vorher: git config --global diff.tool kdiff3
+vorher: git config --global diff.tool meld (im PC-Pool schon
+X)
+
+oder: git config --global diff.tool kdiff3
 
 6. Branch london in master mergen
 a) master auschecken: git checkout master
@@ -1805,7 +1931,7 @@ __pycache__
 I
 
 Bedeutung der Zeilen
-7.1 Erklärender Kommentar
+7.1 Erklärender Kommentar (stand vorher schon drin)
 7.2 Ignoriere alle Dateien in Unterverzeichnissen namens __pycache__
 26 / 31
 
@@ -1848,12 +1974,10 @@ I
 Hintergrundwissen:
 I
 I
-
 I
 
 git help rebase
-https:
-//onlywei.github.io/explain-git-with-d3/#rebase
+https://onlywei.github.io/...
 dort git rebase master eintippen, Animation anschauen
 und Text lesen
 27 / 31
@@ -2006,26 +2130,54 @@ Schlussbemerkungen
 Schlussbemerkungen (2): Blick übern Tellerrand
 I
 
-Kritische Einführungstage (02. - 13. Okt.)
-https://www.kreta-dresden.org/
-I
-
-I
-
-Mo. 09.10.:
-Workshop: Sichere Kommunikation - Warum und Wie?
-
-Umundu-Festival (20. - 28. Okt.)
+Umundu-Festival (01. - 06. Okt.)
 I
 I
 I
 I
 
 Festival für nachhaltige Entwicklung
-Fokus Thema 2017: Armut und Reichtum
+Fokus Thema 2018: „Utopien“
 Filme, Vorträge, Workshops, ...
 https://umundu.de/
 
+29 / 31
+
+Warum Versionsverwaltung?
+
+Warum Git?
+
+Git Einführung (mit Praxis)
+
+Schlussbemerkungen
+
+Schlussbemerkungen (2): Blick übern Tellerrand
+I
+
+Umundu-Festival (01. - 06. Okt.)
+I
+I
+I
+I
+
+I
+
+Festival für nachhaltige Entwicklung
+Fokus Thema 2018: „Utopien“
+Filme, Vorträge, Workshops, ...
+https://umundu.de/
+
+Kritische Einführungstage (08. - 18. Okt.)
+https://www.kreta-dresden.org/
+I
+I
+I
+I
+
+Fahrrad-Standt-Rundgang
+Kritische Wissenschaft
+Klimawandel und Gesundheit (Kohle)
+...
 29 / 31
 
 Warum Versionsverwaltung?
@@ -2044,18 +2196,20 @@ Fragen?
 
 I
 
-Unterstützung
-I
-I
-I
-
-:
+Unterstützung:
 
 (im Rahmen unserer Möglichkeiten)
 
+I
+
 https://fsfw-dresden.de/sprechstunde
 https://fsfw-dresden.de/git-ws
+
+I
+
 kontakt@fsfw-dresden.de
+
+I
 
 30 / 31
 

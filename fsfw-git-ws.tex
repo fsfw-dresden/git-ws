@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{gitintro20}
+% \includeonlyframes{schluss10}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -9,6 +9,7 @@
 \usepackage{csquotes}
 \usepackage{eurosym}
 \usepackage{wasysym}
+\usepackage{amssymb}
 \MakeAutoQuote{„}{”}
 \usepackage[absolute,overlay]{textpos} % for \textblock
 
@@ -154,12 +155,12 @@
     fürs Studium, $\approx$ 800 \geneuro{} vom StuRa für 130 Stk.
   \item Live-Linux / freie Windows-Programme
     \pause
-  \item Hat viel Arbeit gemacht
+  \item Vorbereitung hat Arbeit und Spaß gemacht
     \pause
   \item Ist gut angekommen (ca. 250 TN)
   \end{itemize}
 
-  \begin{textblock*}{40mm}[0.,0.](80mm,37mm)
+  \begin{textblock*}{40mm}[0.,0.](80mm,42mm)
     \visible<2->{
       \includegraphics[width=40mm]{img-src/usb-hub}
     }
@@ -186,6 +187,34 @@
 %
 %     }
 %   \end{textblock*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[label=ct25]
+  \frametitle{Ringvorlesung}
+
+  Im WS 2018/19 organisiert die FSFW erstmals eine Ringvorlesung
+  \medskip
+  Thema:
+
+  \begin{center}
+   {\Large Freie Software und Freies Wissen als Beruf}
+  \end{center}
+
+  \smallskip
+  $\rightarrow$ Ist interessant und bringt bis zu 3 CP
+
+  \bigskip
+  Zeit: Dienstags ab 16.10.2018, 17-18:30 Uhr
+
+  \smallskip
+  Ort: HTW Dresden, Raum Z 254
+
+  \smallskip
+  Infos: \url{fsfw-dresden.de/ringvorlesung}
+
 
 \end{frame}
 
@@ -233,7 +262,8 @@
           \texttt{blog}\\[1mm]
           \texttt{newsletter}
           \texttt{mitmachen}\\[1mm]
-          \texttt{fork}\\[2mm]
+          \texttt{fork}\\[1mm]
+          \texttt{ringvorlesung}\\[2mm]
           \texttt{\textbf{git-ws}}\\[-3mm]
         }}
     \right.$
@@ -637,28 +667,28 @@ Wozu zweiphasiger Commit-Prozess?
 \begin{itemize}
  \item Inhalt erzeugen
 \begin{itemize}
- \item \cverb|printf "Hallo\nWelt\n" > README.md|
- \item \cverb|git status|
- \item \cverb|git add README.md| \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
- \item \cverb|git status|
- \item \cverb|git commit -m "New content of README"| %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
- \item \cverb|git status|
+ \item \verb|printf "Hallo\nWelt\n" > README.md|
+ \item \verb|git status|
+ \item \verb|git add README.md| \qquad \visible<1->{{\scriptsize Tipp: Auto-Vervollständigung mit TAB}}
+ \item \verb|git status|
+ \item \verb|git commit -m "New content of README"| %\quad \visible<4->{{\scriptsize Fehler absichtlich}}
+ \item \verb|git status|
 \end{itemize}
 \pause
  \item Änderungen durchführen, anzeigen und committen
 \begin{itemize}
- \item \cverb|sed -i -- "s/Welt/Leute/g" README.md|
- \item \cverb|git diff|
+ \item \verb|sed -i -- "s/Welt/Leute/g" README.md|
+ \item \verb|git diff|
  \pause
  \pause
- \item \cverb|git commit -am "change Hello-message"|
+ \item \verb|git commit -am "change Hello-message"|
 \end{itemize}
  \pause
  \item Sich Überblick verschaffen
  \begin{itemize}
- \item \cverb|git status|
- \item \cverb|git log|
- \item \cverb|gitk|
+ \item \verb|git status|
+ \item \verb|git log|
+ \item \verb|gitk|
  \end{itemize}
 %  \pause
 %  \item Letzten commit korrigieren (mit Editor, default: \texttt{\$EDITOR})
@@ -865,9 +895,9 @@ Wozu zweiphasiger Commit-Prozess?
 \item<3-> beliebig viele Branches möglich
 \item<4-> Branch/Revision wechseln:\\
 % !! aus unklarem Grund funktioniert das hier nicht (\cverb oder \verb):
-% \only<4,6>{\cverb|git checkout bugfix|%}
-% \only<5>{\cverb|git checkout master|}
-% \only<7->{\cverb|git checkout <ref>|}
+% \only<4,6>{\verb|git checkout bugfix|%}
+% \only<5>{\verb|git checkout master|}
+% \only<7->{\verb|git checkout <ref>|}
 
 % deswegen nehmen wir jetzt \texttt (ohne Farbe)
 \only<4,6>{\texttt{git checkout bugfix}}
@@ -1072,17 +1102,17 @@ Wozu zweiphasiger Commit-Prozess?
 \item Fall 1: Fast-Forward
 \pause
 \begin{itemize}
- \item \cverb|git checkout master|
+ \item \verb|git checkout master|
  \pause
- \item \cverb|git merge bugfix|
+ \item \verb|git merge bugfix|
 \end{itemize}
 \pause
 \bigskip
 \item Fall 2: Parallele Zweige
 \begin{itemize}
- \item \cverb|git checkout master|
+ \item \verb|git checkout master|
  \pause
- \item \cverb|git merge bugfix|
+ \item \verb|git merge bugfix|
  \item[$\Rightarrow$] Erzeugung eines "`Merge-Commits"'
  \pause
  \item Automatische Konfliktlösung ziemlich gut
@@ -1107,8 +1137,8 @@ Wozu zweiphasiger Commit-Prozess?
   \item manuell editieren um den Konflikt aufzuheben (z.\,B. beide
     Zeilen behalten, die Änderungen in beiden Zeilen zusammenführen,
     eine Version behalten), die Marker entfernen
-  \item \cverb|git add <conflicting-file>|
-  \item \cverb|git commit|
+  \item \verb|git add <conflicting-file>|
+  \item \verb|git commit|
   \end{itemize}
 \end{frame}
 
@@ -1120,11 +1150,12 @@ Wozu zweiphasiger Commit-Prozess?
 \frametitle{Praxis}
 \begin{itemize}
  \item Bereitgestelltes nicht-trivials Repo:\\
- {\scriptsize \url{https://pubgit.sotecware.net/fsfw-git-workshop/lyrik}}
+%  {\scriptsize \url{https://pubgit.sotecware.net/fsfw-git-workshop/lyrik}}
+ {\scriptsize \url{https://github.com/fsfw-dresden/git-ws-lyrik.git}}
  \item Basis für verschiedene Aufgaben (Anregungen zum spielen)
 \begin{enumerate}
- \item Repo klonen \cverb|git clone <url>|
- \item Überblick verschaffen: \cverb|gitk --all|
+ \item Repo klonen \verb|git clone <url>|
+ \item Überblick verschaffen: \verb|gitk --all|
  \begin{enumerate}[a)]
   \item Wie viele Commits, Committer gibt es?
   \item Wie viele Branches?
@@ -1132,14 +1163,14 @@ Wozu zweiphasiger Commit-Prozess?
  \item Änderungen vornehmen
  \begin{enumerate}[a)]
  \item zum Branch \textit{weimar} wechseln
- \item in Datei \cverb|gedichte/prometheus.md| 'YYY' durch 'ich' ersetzen,
+ \item in Datei \verb|gedichte/prometheus.md| 'YYY' durch 'ich' ersetzen,
  \item committen
- \item analog im Branch \textit{london} \cverb|sonnets/text1.md| 'XXX' durch 'thee' ersetzen
+ \item analog im Branch \textit{london} \verb|sonnets/text1.md| 'XXX' durch 'thee' ersetzen
  \end{enumerate}
  \item commit-History einzelner Dateien anzeigen
  \begin{enumerate}[a)]
-  \item \cverb|git blame AUTHORS.md|
-  \item \cverb|git blame sonnets/text1.md|
+  \item \verb|git blame AUTHORS.md|
+  \item \verb|git blame sonnets/text1.md|
  \end{enumerate}
 \setcounter{taskcounter}{\value{enumi}}
 \end{enumerate}
@@ -1158,18 +1189,20 @@ Wozu zweiphasiger Commit-Prozess?
 
  \item Änderungen anzeigen
  \begin{enumerate}[a)]
-  \item ... seit dem vorletzten Commit: \cverb|git diff HEAD~|
+  \item ... seit dem vorletzten Commit: \verb|git diff HEAD~|
   \item[$\rightarrow$] beliebige Änderungen vornehmen
-  \item ... seit dem letzten Commit: \cverb|git diff|
+  \item ... seit dem letzten Commit: \verb|git diff|
   \item[]
-  \item Grafische diff-Anzeige: \cverb|diff| durch \cverb|difftool| ersetzen
-  \item[] vorher: \cverb|git config --global diff.tool kdiff3|
+  \item Grafische diff-Anzeige: \verb|diff| durch \verb|difftool| ersetzen
+  \item[] vorher:\\
+  \verb|git config --global diff.tool meld| {(\tiny im PC-Pool schon \checkmark)}
+  \item[] oder passendes Tool konfigurieren: \verb|git config --global diff.tool kdiff3|
   \end{enumerate}
   \item Branch \textit{london} in \textit{master} mergen
   \begin{enumerate}[a)]
-   \item master auschecken: \cverb|git checkout master|
-   \item merge durchführen: \cverb|git merge london|
-   \item Ergebnis anschauen: \cverb|gitk --all|
+   \item master auschecken: \verb|git checkout master|
+   \item merge durchführen: \verb|git merge london|
+   \item Ergebnis anschauen: \verb|gitk --all|
   \end{enumerate}
 
  \setcounter{taskcounter}{\value{enumi}}
@@ -1191,22 +1224,22 @@ Wozu zweiphasiger Commit-Prozess?
 
   \item Irrelevante Dateien ignorieren
   \begin{enumerate}[a)]
-   \item sicherstellen, dass \cverb|git status| "`working directory clean"' liefert
-   \item Skript ausführen: \cverb|python3 scripts/find-shortest-poem.py|
-   \item \cverb|git status| $\rightarrow$ Hilfsdateien bemerken (\cverb|__pycache__|)
+   \item sicherstellen, dass \verb|git status| "`working directory clean"' liefert
+   \item Skript ausführen: \verb|python3 scripts/find-shortest-poem.py|
+   \item \verb|git status| $\rightarrow$ Hilfsdateien bemerken (\verb|__pycache__|)
    \item[] {\scriptsize Häufig treten lokale Dateien auf, deren Änderungen nicht von git verfolgt werden sollen
-   $\rightarrow$ Datei \cverb|.gitignore| hilft}
-   \item ignore-Datei ergänzen: \cverb|printf "__pycache__" >> .gitignore|
-   \item Staus-Änderung zur Kenntnis nehmen: \cverb|git status|
-   \item Committen: \cverb|git commit -am "ignore python-bytecode-dir"|
+   $\rightarrow$ Datei \verb|.gitignore| hilft}
+   \item ignore-Datei ergänzen: \verb|printf "__pycache__" >> .gitignore|
+   \item Staus-Änderung zur Kenntnis nehmen: \verb|git status|
+   \item Committen: \verb|git commit -am "ignore python-bytecode-dir"|
 %    \begin{itemize}
-%     \item \cverb|git add .gitignore|
+%     \item \verb|git add .gitignore|
 %     \item
 %    \end{itemize}
 \smallskip
-   \item Zur Kenntnis nehmen: \cverb|git status| $\rightarrow$ "`working directory clean"'
+   \item Zur Kenntnis nehmen: \verb|git status| $\rightarrow$ "`working directory clean"'
   \end{enumerate}
-  \item[] Hinweis: Inhalt der Datei \cverb|.gitignore| (nachprüfen):
+  \item[] Hinweis: Inhalt der Datei \verb|.gitignore| (nachprüfen):
   {\scriptsize
   \begin{verbatim}
    # This file specifies which files should not be tracked by git
@@ -1217,8 +1250,8 @@ Wozu zweiphasiger Commit-Prozess?
   \begin{itemize}
   \item Bedeutung der Zeilen
   \begin{enumerate}
-   \item Erklärender Kommentar
-   \item Ignoriere alle Dateien in Unterverzeichnissen namens \cverb|__pycache__|
+   \item Erklärender Kommentar (stand vorher schon drin)
+   \item Ignoriere alle Dateien in Unterverzeichnissen namens \verb|__pycache__|
   \end{enumerate}
 
   \end{itemize}
@@ -1237,10 +1270,10 @@ Wozu zweiphasiger Commit-Prozess?
  \item Branch \textit{rom} in \textit{master} mergen
  \begin{enumerate}[a)]
  \item merge durchführen $\rightarrow$ Konflikt zur Kenntnis nehmen
- \item Überblick verschaffen: \cverb|git status|  \cverb|gitk --all|
- \item Manuell Konflikt in \cverb|AUTHORS.md| beheben
+ \item Überblick verschaffen: \verb|git status|  \verb|gitk --all|
+ \item Manuell Konflikt in \verb|AUTHORS.md| beheben
  \item Merge abschließen durch commiten der Änderungen:\\
- {\tiny \cverb|git commit --add -m "merge branch rom after manual conflict resolution"|}
+ {\tiny \verb|git commit --add -m "merge branch rom after manual conflict resolution"|}
  \end{enumerate}
 
  \setcounter{taskcounter}{\value{enumi}}
@@ -1250,19 +1283,19 @@ Weitere Ideen:
 \begin{itemize}
  \item Eigenen Branch anlegen mit bestimmten Eltern-Knoten
  \begin{itemize}
-  \item Commit-ID herausfinden: \cverb|git log| (ersten 4 Zeichen reichen)
-  \item \cverb|git checkout <id>|
-  \item \cverb|git checkout -b mybranch|
+  \item Commit-ID herausfinden: \verb|git log| (ersten 4 Zeichen reichen)
+  \item \verb|git checkout <id>|
+  \item \verb|git checkout -b mybranch|
  \end{itemize}
  \item Rebase aller Branches, so dass repo linear wird
  \begin{itemize}
   \item Hintergrundwissen:
   \begin{itemize}
-   \item  \cverb|git help rebase|
+   \item  \verb|git help rebase|
 
    % das item soll auf eine Zeile passen, deshalb URL abkürzen
 \item \href{https://onlywei.github.io/explain-git-with-d3/#rebase}{https://onlywei.github.io/...}
-  \item dort \cverb|git rebase master| eintippen, Animation anschauen und Text lesen
+  \item dort \verb|git rebase master| eintippen, Animation anschauen und Text lesen
   \end{itemize}
  \end{itemize}
 
@@ -1279,7 +1312,7 @@ Weitere Ideen:
 \item github $\neq$ git
 \begin{itemize}
  \item git: Freies Tool zur Versionsverwaltung
- \item github: Kommerzieller Webservice basierend auf git
+ \item github: Kommerzieller Webservice \textit{basierend auf} git
 \end{itemize}
 \bigskip
 \pause
@@ -1287,48 +1320,60 @@ Weitere Ideen:
 \begin{itemize}
  \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
- \item[$\rightarrow$] \cverb|.git|-Verzeichnis wird ggf. sehr groß
+ \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
 \end{itemize}
 \bigskip
 \pause
 \item Nicht behandelte wichtige Konzepte/Kommandos
 \begin{itemize}
- \item \cverb|git fetch|, \cverb|git pull|, \cverb|git push|,  \cverb|git rebase|, ...
+ \item \verb|git fetch|, \verb|git pull|, \verb|git push|,  \verb|git rebase|, ...
  \item Siehe Cheat-Sheet
 \end{itemize}
 \bigskip
 \pause
 \item Weitere Tipps:
 \begin{itemize}
-\item \href{https://github.com/magicmonty/bash-git-prompt}{Status-Infos im Bash-Prompt}~
-\raisebox{-1mm}{\includegraphics[width=4cm]{img-src/git-prompt-snapshot1}}
+\item \href{https://github.com/magicmonty/bash-git-prompt}{Status-Infos im Bash-Prompt}
 % git-prompt-snapshot1
-\item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \cverb|.gitconfig| (z.B.: \cverb|git co| $\rightarrow$ \cverb| git checkout|)
+\item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
 \item \href{https://stackoverflow.com/a/7335487/333403}{Globale gitignore-Datei} anlegen
 \item \href{http://nvie.com/posts/a-successful-git-branching-model/}{Bewährtes Branching-Modell} anwenden
 \end{itemize}
 
 \end{itemize}
+\begin{textblock*}{50mm}[0.,0.](70mm,73mm)
+\visible<4->{
+\includegraphics[width=56mm]{img-src/git-prompt-snapshot1}
+}
+\end{textblock*}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=schluss20]{Schlussbemerkungen (2): Blick übern Tellerrand}
 
 \begin{itemize}
- \item Kritische Einführungstage (02. - 13. Okt.)\\[-6mm]
-\url{https://www.kreta-dresden.org/}
-\hspace{12mm}\raisebox{-1mm}{\includegraphics[width=2cm]{img-src/kreta-logo}}
-   \begin{itemize}
-   \item Mo. 09.10.:\\ \href{https://www.kreta-dresden.org/program/sichere-kommunikation-warum-und-wie.html}
-   {Workshop: Sichere Kommunikation - Warum und Wie?}
-   \end{itemize}
-   \item[]
-   \item Umundu-Festival (20. - 28. Okt.) \quad \hspace{12mm}\raisebox{-4mm}{\includegraphics[width=2cm]{img-src/umundu-logo}}
+\vspace{-3mm}
+   \item Umundu-Festival (01. - 06. Okt.) \quad \hspace{12mm}\raisebox{-8mm}{\includegraphics[width=2cm]{img-src/umundu-10-bild.jpg}}
    \begin{itemize}
     \item Festival für nachhaltige Entwicklung
-    \item Fokus Thema 2017: Armut und Reichtum
+    \item Fokus Thema 2018: "`Utopien"'
     \item Filme, Vorträge, Workshops, ...
     \item \url{https://umundu.de/}
+   \end{itemize}
+  \item[]
+
+  \pause
+ \item Kritische Einführungstage (08. - 18. Okt.)\\[-6mm]
+\vspace{-8mm}
+\url{https://www.kreta-dresden.org/}
+\hspace{12mm}\raisebox{-1mm}{\includegraphics[width=2cm]{img-src/kreta-logo-2018}}
+
+   \begin{itemize}
+    \item Fahrrad-Stadt-Rundgang
+    \item Kritische Wissenschaft
+    \item Klimawandel und Gesundheit (Kohle)
+    \item ...
    \end{itemize}
 \end{itemize}
 
@@ -1338,11 +1383,12 @@ Weitere Ideen:
 \begin{frame}[label=uj]{Schlussbemerkungen (3)}
 \begin{itemize}
  \item Fragen?\\[10mm]
- \item Unterstützung {\tiny (im Rahmen unserer Möglichkeiten)}:
+ \item Unterstützung: {\tiny (im Rahmen unserer Möglichkeiten)}
    \begin{itemize}
    \item \url{https://fsfw-dresden.de/sprechstunde}
    \item \url{https://fsfw-dresden.de/git-ws}
-   \item \url{kontakt@fsfw-dresden.de}
+   \bigskip
+   \item {\Large \url{kontakt@fsfw-dresden.de}}
    \end{itemize}
 \end{itemize}
 
