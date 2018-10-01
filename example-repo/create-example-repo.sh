@@ -4,7 +4,7 @@ reponame="lyrik"
 currdir="$(pwd)"
 ressources="$currdir/ressources"
 
-rm -d -r -f $reponame 
+rm -d -r -f $reponame
 #&> /dev/null
 
 
@@ -33,8 +33,8 @@ Lernziele:
  - Repos klonen
  - Repos visualisieren (\`git log\`, \`gitk\`)
  - Zwischen Zweigen wechseln, Zweige anlegen, löschen
- - \`git blame\` 
- - \`git merge <branch-name>\` und  \`git rebase <branch-name>\` 
+ - \`git blame\`
+ - \`git merge <branch-name>\` und  \`git rebase <branch-name>\`
 END
 
 
@@ -289,6 +289,6 @@ END
 
 
 git add .
-git commit -m "AUTORS.md angelegt" --author="Git Tutor <kontakt@fsfw-dresden.de>" --date="2017-09-30 21:00:00"
+git commit -m "Hilfs-Skripte hinzugefügt" --author="Git Tutor <kontakt@fsfw-dresden.de>" --date="2017-09-30 21:00:00"
 
 
