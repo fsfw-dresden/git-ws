@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{uebung20}
+% \includeonlyframes{gitintro20}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -65,7 +65,7 @@
 \setbeamertemplate{footline}[frame number]
 
 \title{Versionsverwaltung mit git: Warum und wie.}
-\subtitle{Bunter Nachmittag des iFSR, 02.10.2017}
+\subtitle{Erstsemester-Einführung Informatik, 01.10.2018}
 
 \addtobeamertemplate{frametitle}{}{%
   \begin{textblock*}{130mm}(.963\textwidth,8.4mm)
@@ -108,7 +108,7 @@
   \onslide<+->
 
   \begin{itemize}
-  \item Hochschulgruppe an der TU (gegründet 2014, ca. 10 P.)
+  \item Hochschulgruppe an der TU (gegründet 2014, ca. 8 P.)
   \item Studierende (TU, HTW) und andere Leute
   \item Hochschulen als Zielgruppe (Multiplikationswirkung)\\
     und Arbeitsfeld (Räume, Strukturen)
@@ -121,7 +121,7 @@
     \item Verschlüsselungsgewinnspiel
     \item Monatliche Sprechstunde zu \LaTeX{} u.a.
     \item Formulierung eines Programmpapiers
-    \item „Uni-Stick”:~80 $\times$ 8\,GB mit freier Software
+    \item „Uni-Stick”: 130 $\times$ 8\,GB mit freier Software
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -147,11 +147,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[label=ct1b,t]
-  \frametitle{Projekt Uni-Stick}
+  \frametitle{Projekt Uni-Stick (3. Auflage)}
 
   \begin{itemize}
   \item \textbf{4000} Flyer in Ersti-Tüten: \textbf{Gutscheine} für 8\,GB Stick mit freier Software
-    fürs Studium, 550 \geneuro{} vom TU-StuRa für 80 Stk.
+    fürs Studium, $\approx$ 800 \geneuro{} vom StuRa für 130 Stk.
   \item Live-Linux / freie Windows-Programme
     \pause
   \item Hat viel Arbeit gemacht
@@ -170,25 +170,22 @@
       \includegraphics[width=55mm]{img-src/uni-stick-ausgabe-vortrag}
     }
   \end{textblock*}
-
-  \begin{textblock*}{55mm}[0.,0.](71mm,63mm)
-    \visible<4->{
-      \begin{itemize}
-       \item Accessibility:
-       \hspace{-5mm}
-       \begin{itemize}
-        \item brltty
-        \item gnome-orca (Screenreader)
-        \item ...
-        \item WIP!
-       \end{itemize}
-
-
-
-      \end{itemize}
-
-    }
-  \end{textblock*}
+%
+%   \begin{textblock*}{55mm}[0.,0.](71mm,63mm)
+%     \visible<4->{
+%       \begin{itemize}
+%        \item Accessibility:
+%        \hspace{-5mm}
+%        \begin{itemize}
+%         \item brltty
+%         \item gnome-orca (Screenreader)
+%         \item ...
+%         \item WIP!
+%        \end{itemize}
+%       \end{itemize}
+%
+%     }
+%   \end{textblock*}
 
 \end{frame}
 
@@ -203,14 +200,14 @@
     \begin{itemize}
     \item Mehr Blog-Beiträge
     \item Kurse (\LaTeX / Python /\textbf{ Git} / Inkscape / \dots)
-    \item Ansible-Infrastruktur-Stipendium
+    \item Infrastruktur-Stipendium
     \item OpenSource-Wettbewerb/Preis
     \item \dots
     \end{itemize}
 
     \bigskip
 
-  \item Aufmerksamkeit erzeugen / Lobby-Arbeit
+  \item Aufmerksamkeit erzeugen / Lobby-Arbeit ("`Landesverträge"')
 
     \bigskip
 
@@ -236,7 +233,8 @@
           \texttt{blog}\\[1mm]
           \texttt{newsletter}
           \texttt{mitmachen}\\[1mm]
-          \texttt{fork}\\[-3mm]
+          \texttt{fork}\\[2mm]
+          \texttt{\textbf{git-ws}}\\[-3mm]
         }}
     \right.$
 
@@ -424,7 +422,7 @@
 \bigskip
 \visible<3->
 {
-2017: Git = defacto Standard
+Seit 2016: Git $\hat{=}$ defacto Standard
 }
 \end{center}
 \end{textblock*}
@@ -434,7 +432,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Git Einführung (mit Praxis)}
-\begin{frame}
+\begin{frame}[label=ef1]
 \frametitle{Einführung in git – Was ist ein Repo?}
 \begin{columns}
   \column{0.245\textwidth}
@@ -444,22 +442,38 @@
     };
     \gitbranch{master}{left=of C}{C};
     \gitHEAD{above=of master}{master}
+    \visible<4->{
     \SAandWT
+    }
   \end{tikzpicture}
+  \column{0.05\textwidth}
+  ~
   \column{0.75\textwidth}
   \begin{itemize}
   \item gerichteter, azyklischer Graph von Versionen
     (\emph{revisions}) einer Ordnerstruktur und deren Inhalt mit
     Metadaten (\emph{Commit-ID}, Autor, Beschreibungstext)
   \item Commit-ID abgeleitet aus dem Inhalt und dem Graphen
-    (kryptographische Hash-Funktion)
+    (kryptographische Hash-Funktion)\\
+    \pause
+    {\tiny Beispiel: b52c95e791e1dac76b7f70292e366de7caa76178}
   \item \emph{\texttt{HEAD}}: Knoten im Graphen; momentaner
     Bezugspunkt für Operationen
   \item \emph{refs}: referenzieren Knoten im Graphen (Beispiele:
-    \texttt{HEAD}, \texttt{HEAD\^}, \texttt{master}, per abgekürzter
-    Commit-ID \texttt{f23faaa})
+    \texttt{HEAD}, \texttt{HEAD\^{}3}, \texttt{master}, \texttt{my\_branch}, \texttt{b52c95e} {\tiny (abgekürzte
+    Commit-ID)})
   \end{itemize}
 \end{columns}
+
+\begin{textblock*}{40mm}[0.,0.](30mm,27mm)
+{\color<3->{gray}{\tiny
+Start\\[7.5mm]
+Nachfolger\\[6.5mm]
+Nach-Nachfolger
+}
+}
+\end{textblock*}
+
 \end{frame}
 
 \begin{frame}[label=gitintro10]
@@ -538,14 +552,17 @@
  \end{itemize}
  \item[]
  \pause
- \item Hintergrund: Wo speichert git die relevanten Informationen?
- \item[$\rightarrow$] Verstecktes Verzeichnis:
- \raisebox{-0.5\height}{
- \includegraphics[width=20mm]{img-src/git-dir1}}
+ \item Hintergrund: Wo speichert git\\ die relevanten Informationen?
+ \item[$\rightarrow$] Verstecktes Verzeichnis \texttt{.git}
+
 
 
 \end{itemize}
-
+\begin{textblock*}{40mm}[0.,0.](70mm,69mm)
+\visible<2->{
+ \includegraphics[width=35mm]{img-src/git-dir1}
+}
+\end{textblock*}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
