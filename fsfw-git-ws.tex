@@ -1,5 +1,5 @@
 \documentclass{beamer}
-% \includeonlyframes{schluss10}
+\includeonlyframes{schluss20,schluss30}
 \synctex=1
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
@@ -66,7 +66,7 @@
 \setbeamertemplate{footline}[frame number]
 
 \title{Versionsverwaltung mit git: Warum und wie.}
-\subtitle{Erstsemester-Einführung Informatik, 01.10.2018}
+\subtitle{Erstsemester-Einführung Informatik, 07.10.2019}
 
 \addtobeamertemplate{frametitle}{}{%
   \begin{textblock*}{130mm}(.963\textwidth,8.4mm)
@@ -109,7 +109,7 @@
   \onslide<+->
 
   \begin{itemize}
-  \item Hochschulgruppe an der TU (gegründet 2014, ca. 8 P.)
+  \item Hochschulgruppe an der TU (gegründet 2014, ca. 7 P.)
   \item Studierende (TU, HTW) und andere Leute
   \item Hochschulen als Zielgruppe (Multiplikationswirkung)\\
     und Arbeitsfeld (Räume, Strukturen)
@@ -120,9 +120,11 @@
     \begin{itemize}
     \item Linux-Install-Party, Linux-Presentation-Day
     \item Verschlüsselungsgewinnspiel
-    \item Monatliche Sprechstunde zu \LaTeX{} u.a.
+    \item Sprechstunde zu \LaTeX{} u.a.
     \item Formulierung eines Programmpapiers
     \item „Uni-Stick”: 130 $\times$ 8\,GB mit freier Software
+    \item Ringvorlesung: Freie Software und Freies Wissen als Beruf
+
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -148,27 +150,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[label=ct1b,t]
-  \frametitle{Projekt Uni-Stick (3. Auflage)}
+  \frametitle{Projekt Uni-Stick (4. Auflage)}
 
   \begin{itemize}
-  \item \textbf{4000} Flyer in Ersti-Tüten: \textbf{Gutscheine} für 8\,GB Stick mit freier Software
-    fürs Studium, $\approx$ 800 \geneuro{} vom StuRa für 130 Stk.
+  \item \textbf{3000} Flyer in Ersti-Tüten: \textbf{Gutscheine} für 8\,GB Stick mit freier Software
+    fürs Studium, Sticks-Beschaffung mit Geld von StuRä
   \item Live-Linux / freie Windows-Programme
     \pause
-  \item Vorbereitung hat Arbeit und Spaß gemacht
+  \item Vorbereitung: Arbeit + Spaß + Lernen
     \pause
   \item Ist gut angekommen (ca. 250 TN)
   \end{itemize}
 
-  \begin{textblock*}{40mm}[0.,0.](80mm,42mm)
+  \begin{textblock*}{40mm}[0.,0.](83mm,42mm)
     \visible<2->{
       \includegraphics[width=40mm]{img-src/usb-hub}
     }
   \end{textblock*}
 
-  \begin{textblock*}{55mm}[0.,0.](15mm,50mm)
+  \begin{textblock*}{55mm}[0.,0.](15mm,57mm)
     \visible<3->{
       \includegraphics[width=55mm]{img-src/uni-stick-ausgabe-vortrag}
+    }
+  \end{textblock*}
+
+
+  \begin{textblock*}{55mm}[0.,0.](75mm,76mm)
+    \visible<4->{
+      Ausgabe: 4.11.2019 APB, E023\\
+
+      Infos/Anmeldung:
+      {\small  \href{https://fsfw-dresden.de/uni-stick}{fsfw-dresden.de/uni-stick}}
     }
   \end{textblock*}
 %
@@ -190,33 +202,6 @@
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[label=ct25]
-  \frametitle{Ringvorlesung}
-
-  Im WS 2018/19 organisiert die FSFW erstmals eine Ringvorlesung
-  \medskip
-  Thema:
-
-  \begin{center}
-   {\Large Freie Software und Freies Wissen als Beruf}
-  \end{center}
-
-  \smallskip
-  $\rightarrow$ Ist interessant und bringt bis zu 3 CP
-
-  \bigskip
-  Zeit: Dienstags ab 16.10.2018, 17-18:30 Uhr
-
-  \smallskip
-  Ort: HTW Dresden, Raum Z 254
-
-  \smallskip
-  Infos: \url{fsfw-dresden.de/ringvorlesung}
-
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1318,7 +1303,7 @@ Weitere Ideen:
 \pause
 \item git nicht gut für (große) Binärdateien
 \begin{itemize}
- \item Merges werden ungemütlich (Binärdateien verwenden z.\,B. oft Offsets)
+ \item Merges werden ungemütlich %(Binärdateien verwenden z.\,B. oft Offsets)
  \item Grund: Delta-Kompression basiert auf zeilenweisen Diffs
  \item[$\rightarrow$] \verb|.git|-Verzeichnis wird ggf. sehr groß
 \end{itemize}
@@ -1333,6 +1318,7 @@ Weitere Ideen:
 \pause
 \item Weitere Tipps:
 \begin{itemize}
+\item \href{https://git-scm.com/docs}{Doku} kennen
 \item \href{https://github.com/magicmonty/bash-git-prompt}{Status-Infos im Bash-Prompt}
 % git-prompt-snapshot1
 \item \href{https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases}{Aliase} in \verb|.gitconfig| (z.B.: \verb|git co| $\rightarrow$ \verb| git checkout|)
@@ -1352,35 +1338,77 @@ Weitere Ideen:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[label=schluss20]{Schlussbemerkungen (2): Blick übern Tellerrand}
 
+
+\begin{center}
+
+\begin{Large}Bits und Bäume\end{Large}  \quad \hspace{12mm}\raisebox{-8mm}{\includegraphics[width=4cm]{img-src/extern/bub-logo.png}}
+\end{center}
+
 \begin{itemize}
 \vspace{-3mm}
-   \item Umundu-Festival (01. - 06. Okt.) \quad \hspace{12mm}\raisebox{-8mm}{\includegraphics[width=2cm]{img-src/umundu-10-bild.jpg}}
+\item[]
+%    \item Bits und Bäume \quad \hspace{12mm}\raisebox{-8mm}{\includegraphics[width=2cm]{img-src/extern/bub-logo.png}}
    \begin{itemize}
-    \item Festival für nachhaltige Entwicklung
-    \item Fokus Thema 2018: "`Utopien"'
-    \item Filme, Vorträge, Workshops, ...
-    \item \url{https://umundu.de/}
+    \item Digitalisierung und Nachhaltigkeit verbinden
+    \item Ressourcen, Freie Software, Privatsphäre, Demokratie, ...
+    \item Größeres Treffen: 23.10., 19:00 Uhr, \href{https://osm.org/go/0MLhQbbYc?node=3140655489}{Rosenwerk}
+    \item \url{https://dresden.bits-und-baeume.org/}
    \end{itemize}
   \item[]
 
-  \pause
- \item Kritische Einführungstage (08. - 18. Okt.)\\[-6mm]
-\vspace{-8mm}
-\url{https://www.kreta-dresden.org/}
-\hspace{12mm}\raisebox{-1mm}{\includegraphics[width=2cm]{img-src/kreta-logo-2018}}
-
-   \begin{itemize}
-    \item Fahrrad-Stadt-Rundgang
-    \item Kritische Wissenschaft
-    \item Klimawandel und Gesundheit (Kohle)
-    \item ...
-   \end{itemize}
 \end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[label=uj]{Schlussbemerkungen (3)}
+\begin{frame}[label=schluss30]{Schlussbemerkungen (3): Blick übern Tellerrand}
+
+
+\begin{textblock*}{40mm}[0.,0.](75mm,20mm)
+
+ \includegraphics[width=3cm]{img-src/extern/urv-plakat-2019-2-A4.jpg}
+\end{textblock*}
+
+\begin{itemize}
+\vspace{-3mm}
+   \item TU--Umweltinitiative
+   \begin{itemize}
+    \item Umweltringvorlesungen ab
+    \item Offenes Grillen/Essen: 24.10.
+    \item Wandern: 02.11.
+    \item \url{https://tuuwi.de/}
+   \end{itemize}
+%   \item[]\bigskip
+
+
+
+  \pause
+ \item Students4Future:\\
+%  Semesterauftakt (25. Okt.)
+% \vspace{-8mm}
+
+   \begin{itemize}
+    \item []
+    \item []
+    \item []
+    \item []
+    \item []
+    \item []
+    \item [] \hspace{40mm} $\rightarrow$ \url{https://fffdd.de}
+    \item []
+   \end{itemize}
+\end{itemize}
+
+\begin{textblock*}{40mm}[0.,0.](20mm,47mm)
+\visible<2->{
+\includegraphics[width=3.5cm]{img-src/extern/fff_auftakttreffen.pdf}
+}
+\end{textblock*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[label=uj]{Schlussbemerkungen (4)}
 \begin{itemize}
  \item Fragen?\\[10mm]
  \item Unterstützung: {\tiny (im Rahmen unserer Möglichkeiten)}
